@@ -1,6 +1,12 @@
 from django.shortcuts import render
 from netmiko import ConnectHandler
 
+file_name = 'test_run_config'
+
+copy_to_tftp = f'copy running-config tftp://172.16.1.5/{file_name}'
+copy_from_tftp = f'copy tftp://172.16.1.5/{file_name} running-config'
+show_uptime = "show version | i uptime"
+
 def home(request):
 	
     if request.method == 'GET':
@@ -10,7 +16,10 @@ def home(request):
         device['username'] = 'admin'
         device['password'] = 'adminpass1'
         conn = ConnectHandler(**device)
-        output = conn.send_command("show version | i uptime")
+
+        #change variable here
+        output = conn.send_command(show_uptime)
+
         template = 'home.html'
         context = {'output': output}
 

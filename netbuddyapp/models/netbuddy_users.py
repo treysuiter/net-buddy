@@ -13,16 +13,17 @@ class NetBuddyUser(models.Model):
 # These receiver hooks allow you to continue to
 # work with the `User` class in your Python code.
 
-# Every time a `User` is created, a matching `Librarian`
+# Every time a `User` is created, a matching `NetBuddyUser`
 # object will be created and attached as a one-to-one
 # property
+
 @receiver(post_save, sender=User)
 def create_netbuddy_user(sender, instance, created, **kwargs):
     if created:
         NetBuddyUser.objects.create(user=instance)
 
-# Every time a `User` is saved, its matching `Librarian`
+# Every time a `User` is saved, its matching `NetBuddyUser`
 # object will be saved.
 @receiver(post_save, sender=User)
 def save_netbuddy_user(sender, instance, **kwargs):
-    instance.netbuddy_user.save()
+    instance.netbuddyuser.save()

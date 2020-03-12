@@ -6,5 +6,5 @@ app_name = 'netbuddyapp'
 
 urlpatterns = [
     path('', home, name='home'),
-    path('routerconfiglist/', router_config_list, name='router_config_list')
+    path('routerconfiglist/', router_config_list, name='routerconfiglist')
 ]

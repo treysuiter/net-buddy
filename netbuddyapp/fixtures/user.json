@@ -1,0 +1,10 @@
+[
+    {
+        "model": "auth.user",
+        "pk": 2,
+        "fields": {
+            "password": "pbkdf2_sha256$180000$o7fdVqT98S9P$Y9fiZjG6RG2FqpsUr3W9V0Okfe6393R7wA4fHLIcef8=",
+            "username": "defaultuser"
+        }
+    }
+]

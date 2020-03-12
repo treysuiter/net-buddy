@@ -1,0 +1,13 @@
+[
+    {
+        "model": "netbuddyapp.netbuddyuser",
+        "pk": 2,
+        "fields": {
+            "user_id": 2,
+            "current_router_ip": "172.16.1.1",
+            "current_vlan_ip": null,
+            "ssh_username": "admin",
+            "ssh_password": "adminpass1"
+        }
+    }
+]

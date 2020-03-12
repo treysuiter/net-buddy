@@ -8,12 +8,12 @@
   <body>
     <h1>Router Configurations</h1>
 
-    <ol>
+    <ul>
     {% for config in all_router_configs %}
         <li>
             {{ config.filename }} {{ config.description }} {{ config.created_at }}
         </li>
     {% endfor %}
-    </ol>
+    </ul>
   </body>
 </html>

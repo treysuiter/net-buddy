@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 def router_config_list(request):
     if request.method == 'GET':
         with sqlite3.connect(Connection.db_path) as conn:
+            current_user = request.user
             conn.row_factory = sqlite3.Row
             db_cursor = conn.cursor()
 
@@ -20,7 +21,8 @@ def router_config_list(request):
                 r.created_at,
                 r.netbuddy_user_id
             from netbuddyapp_routerconfiguration r
-            """)
+            where r.netbuddy_user_id = ?
+            """, (current_user.id,))
 
             all_router_configs = []
             dataset = db_cursor.fetchall()

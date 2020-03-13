@@ -8,5 +8,10 @@
   <body>
     <h1>Filename: {{ router_config.filename }}</h1>
     <h2>Description: {{router_config.description}}</h2>
+    <form action="{% url 'netbuddyapp:routerconfig' router_config.id %}" method="POST">
+    {% csrf_token %}
+    <input type="hidden" name="actual_method" value="DELETE">
+    <button>Delete</button>
+</form>
   </body>
 </html>

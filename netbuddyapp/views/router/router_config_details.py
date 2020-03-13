@@ -35,3 +35,16 @@ def router_config_details(request, router_config_id):
         router_config = get_router_config(router_config_id)
         template_name = 'router/router_config_details.html'
         return render(request, template_name, {'router_config':router_config})
+
+    elif request.method == 'POST':
+        form_data = request.POST
+
+        if (
+            "actual_method" in form_data
+            and form_data["actual_method"] == "DELETE"
+        ):
+
+            router_config = RouterConfiguration.objects.get(pk=router_config_id)
+            router_config.delete()
+
+            return redirect(reverse('netbuddyapp:routerconfiglist'))

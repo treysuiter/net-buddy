@@ -4,6 +4,7 @@ from netbuddyapp.models import RouterConfiguration
 from ..connection import Connection
 from django.contrib.auth.decorators import login_required
 
+
 @login_required
 def router_config_list(request):
     if request.method == 'GET':
@@ -51,14 +52,16 @@ def router_config_list(request):
         form_data = request.POST
 
         new_config = RouterConfiguration(
-        filename = form_data['filename'],
-        description = form_data['description'],
-        netbuddy_user_id =  current_user.id
+            filename=form_data['filename'],
+            description=form_data['description'],
+            netbuddy_user_id=current_user.id
         )
 
         # and then save to the db
         new_config.save()
         return redirect(reverse('netbuddyapp:routerconfiglist'))
+
+        # Original slq query
 
         # current_user = request.user
         # form_data = request.POST

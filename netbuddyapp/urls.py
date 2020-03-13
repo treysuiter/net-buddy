@@ -6,9 +6,12 @@ app_name = 'netbuddyapp'
 
 urlpatterns = [
     path('', home, name='home'),
+
     path('accounts/', include('django.contrib.auth.urls')),
     path('logout/', logout_user, name='logout'),
     path('register/', register, name="register"),
+
     path('routerconfig/form', router_config_form, name='routerconfigform'),
-    path('routerconfiglist/', router_config_list, name='routerconfiglist')
+    path('routerconfiglist/', router_config_list, name='routerconfiglist'),
+    path('routerconfiglist/<int:router_config_id>/', router_config_details, name='routerconfig')
 ]

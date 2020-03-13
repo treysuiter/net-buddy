@@ -11,7 +11,7 @@
     <ul>
     {% for config in all_router_configs %}
         <li>
-            {{ config.filename }} {{ config.description }} {{ config.created_at }}
+            <a href="{% url 'netbuddyapp:routerconfig' config.id %}"> {{ config.filename }} </a> {{ config.description }} {{ config.created_at }}
         </li>
     {% endfor %}
     </ul>

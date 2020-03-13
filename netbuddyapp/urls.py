@@ -13,5 +13,6 @@ urlpatterns = [
 
     path('routerconfig/form', router_config_form, name='routerconfigform'),
     path('routerconfiglist/', router_config_list, name='routerconfiglist'),
-    path('routerconfiglist/<int:router_config_id>/', router_config_details, name='routerconfig')
+    path('routerconfiglist/<int:router_config_id>/', router_config_details, name='routerconfig'),
+    path('routerconfiglist/<int:router_config_id>/form/', router_config_edit_form, name='routerconfigedit')
 ]

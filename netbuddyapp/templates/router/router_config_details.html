@@ -12,6 +12,10 @@
     {% csrf_token %}
     <input type="hidden" name="actual_method" value="DELETE">
     <button>Delete</button>
-</form>
+    </form>
+    <form action="{% url 'netbuddyapp:routerconfigedit' router_config.id %}" method="GET">
+        {% csrf_token %}
+        <button>Edit</button>
+    </form>
   </body>
 </html>

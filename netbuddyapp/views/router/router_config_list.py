@@ -1,13 +1,15 @@
 import sqlite3
-from django.shortcuts import render
+from django.shortcuts import render, redirect, reverse
 from netbuddyapp.models import RouterConfiguration
 from ..connection import Connection
 from django.contrib.auth.decorators import login_required
+
 
 @login_required
 def router_config_list(request):
     if request.method == 'GET':
         with sqlite3.connect(Connection.db_path) as conn:
+            current_user = request.user
             conn.row_factory = sqlite3.Row
             db_cursor = conn.cursor()
 
@@ -20,7 +22,8 @@ def router_config_list(request):
                 r.created_at,
                 r.netbuddy_user_id
             from netbuddyapp_routerconfiguration r
-            """)
+            where r.netbuddy_user_id = ?
+            """, (current_user.id,))
 
             all_router_configs = []
             dataset = db_cursor.fetchall()
@@ -42,3 +45,38 @@ def router_config_list(request):
         }
 
         return render(request, template, context)
+
+    elif request.method == 'POST':
+
+        current_user = request.user
+        form_data = request.POST
+
+        new_config = RouterConfiguration(
+            filename=form_data['filename'],
+            description=form_data['description'],
+            netbuddy_user_id=current_user.id
+        )
+
+        # and then save to the db
+        new_config.save()
+        return redirect(reverse('netbuddyapp:routerconfiglist'))
+
+        # Original slq query
+
+        # current_user = request.user
+        # form_data = request.POST
+
+        # with sqlite3.connect(Connection.db_path) as conn:
+        #     db_cursor = conn.cursor()
+
+        #     db_cursor.execute("""
+        #     INSERT INTO netbuddyapp_routerconfiguration
+        #     (
+        #         filename, description, netbuddy_user_id, created_at
+        #     )
+        #     VALUES (?, ?, ?, ?)
+        #     """,
+        #     (form_data['filename'], form_data['description'],
+        #         current_user.id, 'placeholder'))
+
+        # return redirect(reverse('netbuddyapp:routerconfiglist'))

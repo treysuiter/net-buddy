@@ -11,9 +11,9 @@
     <ul>
     {% for config in all_router_configs %}
         <li>
-            {{ config.filename }} {{ config.description }} {{ config.created_at }}
-        </li>
+            <a href="{% url 'netbuddyapp:routerconfig' config.id %}"> {{ config.filename }} </a> {{ config.description }} {{ config.created_at }}
     {% endfor %}
     </ul>
+    <a href="{% url 'netbuddyapp:routerconfigform' %}"> Click here to add new configuration</a>
   </body>
 </html>

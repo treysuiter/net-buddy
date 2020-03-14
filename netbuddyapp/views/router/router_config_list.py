@@ -1,8 +1,9 @@
 import sqlite3
 from django.shortcuts import render, redirect, reverse
-from netbuddyapp.models import RouterConfiguration
+from netbuddyapp.models import RouterConfiguration, NetBuddyUser
 from ..connection import Connection
 from django.contrib.auth.decorators import login_required
+from netmiko import ConnectHandler
 
 
 @login_required
@@ -49,6 +50,7 @@ def router_config_list(request):
     elif request.method == 'POST':
 
         current_user = request.user
+        current_netbuddy_user = NetBuddyUser.objects.get(user_id=current_user.id)
         form_data = request.POST
 
         new_config = RouterConfiguration(
@@ -56,6 +58,17 @@ def router_config_list(request):
             description=form_data['description'],
             netbuddy_user_id=current_user.id
         )
+
+        #Netmiko commands
+
+        device = {}
+        device['device_type'] = 'cisco_ios'
+        device['ip'] = f"{current_netbuddy_user.current_router_ip}"
+        device['username'] = f"{current_netbuddy_user.ssh_username}"
+        device['password'] = f"{current_netbuddy_user.ssh_password}"
+        conn = ConnectHandler(**device)
+
+        conn.send_command(f"copy running-config tftp://172.16.1.5/{form_data['filename']}")
 
         # and then save to the db
         new_config.save()

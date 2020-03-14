@@ -1,0 +1,14 @@
+{% extends 'shared/base.html' %}
+{% load static %}
+{% block content %}
+
+<h1>Current Router Config Info</h1>
+<h2>Hostname:</h2>
+<pre>{{ prompt_output }}</pre>
+<h2>Uptime:</h2>
+<pre>{{ uptime_output }}</pre>
+<h2>Running-Config:</h2>
+<pre>{{ showrun_output }}</pre>
+
+
+{% endblock %}

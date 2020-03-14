@@ -69,6 +69,8 @@ def router_config_list(request):
         conn = ConnectHandler(**device)
 
         conn.send_command(f"copy running-config tftp://172.16.1.5/{form_data['filename']}")
+        conn.disconnect()
+
 
         # and then save to the db
         new_config.save()

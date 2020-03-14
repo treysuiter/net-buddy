@@ -56,7 +56,7 @@ def router_config_details(request, router_config_id):
             device['password'] = f"{current_netbuddy_user.ssh_password}"
             conn = ConnectHandler(**device)
 
-            conn.send_command(f"copy tftp://172.16.1.5/{router_config_to_load.filename} running-config")
+            conn.send_command_timing(f"copy tftp://172.16.1.5/{router_config_to_load.filename} running-config")
             conn.disconnect()
 
             return redirect(reverse('netbuddyapp:routerconfiglist'))

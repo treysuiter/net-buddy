@@ -28,6 +28,7 @@
             {% if user.is_authenticated %}
             <li class="navList__route"><a href="{% url 'netbuddyapp:routerconfiglist' %}">My Configs</a></li>
             <li class="navList__route"><a href="{% url 'netbuddyapp:logout' %}">Logout</a></li>
+            <li> Hello, {{ user.username }}.</li>
             {% endif %}
         </ol>
     </nav>

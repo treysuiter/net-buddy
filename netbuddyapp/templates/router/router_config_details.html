@@ -1,15 +1,20 @@
 {% extends 'shared/base.html' %}
 {% load static %}
 {% block content%}
-    <h1>Filename: {{ router_config.filename }}</h1>
-    <h2>Description: {{router_config.description}}</h2>
-    <form action="{% url 'netbuddyapp:routerconfig' router_config.id %}" method="POST">
+<h1>Filename: {{ router_config.filename }}</h1>
+<h2>Description: {{router_config.description}}</h2>
+<form action="{% url 'netbuddyapp:routerconfig' router_config.id %}" method="POST">
+    {% csrf_token %}
+    <input type="hidden" name="actual_method" value="LOAD_CONFIG">
+    <button>Load This Config</button>
+</form>
+<form action="{% url 'netbuddyapp:routerconfig' router_config.id %}" method="POST">
     {% csrf_token %}
     <input type="hidden" name="actual_method" value="DELETE">
     <button>Delete</button>
-    </form>
-    <form action="{% url 'netbuddyapp:routerconfigedit' router_config.id %}" method="GET">
-        {% csrf_token %}
-        <button>Edit</button>
-    </form>
+</form>
+<form action="{% url 'netbuddyapp:routerconfigedit' router_config.id %}" method="GET">
+    {% csrf_token %}
+    <button>Edit</button>
+</form>
 {% endblock %}

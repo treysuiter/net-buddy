@@ -1,10 +1,18 @@
+{% extends 'shared/base.html' %}
+{% load static %}
+{% block content%}
+
 <h1>Welcome to NetBuddy</h1>
 
-    <ul>
+    {% if user.is_authenticated %}
+     <p>You are currently logged in.</p>
+    {% else %}
+     <ul>
         <li><a href="{% url 'netbuddyapp:login' %}">Login</a></li>
         <li><a href="{% url 'netbuddyapp:register' %}">Register</a></li>       
     </ul>
-
+    {% endif %}
+{% endblock %}
 
 {% comment %} <pre>{{ output }}</pre>
 <p>{{ output }}</p> {% endcomment %}

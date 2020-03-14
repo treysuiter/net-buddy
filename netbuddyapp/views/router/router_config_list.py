@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect, reverse
 from netbuddyapp.models import RouterConfiguration
 from ..connection import Connection
 from django.contrib.auth.decorators import login_required
+from netmiko import ConnectHandler
 
 
 @login_required
@@ -56,6 +57,17 @@ def router_config_list(request):
             description=form_data['description'],
             netbuddy_user_id=current_user.id
         )
+
+        #Netmiko commands
+
+        device = {}
+        device['device_type'] = 'cisco_ios'
+        device['ip'] = '172.16.1.1'
+        device['username'] = 'admin'
+        device['password'] = 'adminpass1'
+        conn = ConnectHandler(**device)
+
+        conn.send_command(f'copy running-config tftp://172.16.1.5/first_config_from_NB')
 
         # and then save to the db
         new_config.save()

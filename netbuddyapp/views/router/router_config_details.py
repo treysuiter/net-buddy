@@ -8,6 +8,13 @@ from netmiko import ConnectHandler
 
 
 def get_router_config(router_config_id):
+    """
+    Returns router config
+    """
+
+
+    #SQL Example
+
     # with sqlite3.connect(Connection.db_path) as conn:
     #     conn.row_factory = model_factory(Book)
     #     db_cursor = conn.cursor()
@@ -32,6 +39,14 @@ def get_router_config(router_config_id):
 
 @login_required
 def router_config_details(request, router_config_id):
+
+    """
+    Will render router config details page when router config title are clicked on My Configs; 
+    Handles loading saved router configs;
+    Handles deleting router configs;
+    Handles edit of router config descriptions
+    """
+
     if request.method == 'GET':
         router_config = get_router_config(router_config_id)
         template_name = 'router/router_config_details.html'
@@ -49,6 +64,9 @@ def router_config_details(request, router_config_id):
             "actual_method" in form_data
             and form_data["actual_method"] == "LOAD_CONFIG"
         ):
+
+            #Netmiko commands
+
             device = {}
             device['device_type'] = 'cisco_ios'
             device['ip'] = f"{current_netbuddy_user.current_router_ip}"
@@ -77,6 +95,9 @@ def router_config_details(request, router_config_id):
             "actual_method" in form_data
             and form_data["actual_method"] == "PUT"
         ):
+
+            #SQL Example
+
             # with sqlite3.connect(Connection.db_path) as conn:
             #     db_cursor = conn.cursor()
 

@@ -4,6 +4,10 @@ from netbuddyapp.models import NetBuddyUser
 
 def router_current_info(request):
 
+    """
+    Handles current router running-config readout on Current Configuration page
+    """
+
     current_user = request.user
     current_netbuddy_user = NetBuddyUser.objects.get(user_id=current_user.id)
 	

@@ -8,6 +8,10 @@ from netmiko import ConnectHandler
 
 @login_required
 def router_config_list(request):
+    """
+    Handles listing user's saved router config on My Configs;
+    Handles saving new router configs
+    """
     if request.method == 'GET':
         with sqlite3.connect(Connection.db_path) as conn:
             current_user = request.user

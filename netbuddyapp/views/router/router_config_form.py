@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from .router_config_details import get_router_config
 
+#View for handling router config form for new router configs and editing existing router configs
 
 @login_required
 def router_config_form(request):

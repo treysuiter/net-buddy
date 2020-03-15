@@ -2,6 +2,11 @@
 {% load static %}
 {% block content %}
 
+{% if error_text %}
+<p>{{ error_text }}</p>
+<p>{{ exception }} </p>
+
+{% else %}
 <h1>Current Router Config Info</h1>
 <h2>Hostname:</h2>
 <pre>{{ prompt_output }}</pre>
@@ -9,6 +14,6 @@
 <pre>{{ uptime_output }}</pre>
 <h2>Running-Config:</h2>
 <pre>{{ showrun_output }}</pre>
-
+{% endif %}
 
 {% endblock %}

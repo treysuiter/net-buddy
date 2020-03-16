@@ -8,6 +8,13 @@ from netmiko import ConnectHandler
 
 
 def get_router_config(router_config_id):
+    """
+    Returns router config
+    """
+
+
+    #SQL Example
+
     # with sqlite3.connect(Connection.db_path) as conn:
     #     conn.row_factory = model_factory(Book)
     #     db_cursor = conn.cursor()
@@ -32,10 +39,26 @@ def get_router_config(router_config_id):
 
 @login_required
 def router_config_details(request, router_config_id):
+
+    """
+    Will render router config details page when router config title are clicked on My Configs; 
+    Handles loading saved router configs;
+    Handles deleting router configs;
+    Handles edit of router config descriptions
+    """
+
     if request.method == 'GET':
-        router_config = get_router_config(router_config_id)
-        template_name = 'router/router_config_details.html'
-        return render(request, template_name, {'router_config': router_config})
+        
+        try:
+            router_config = get_router_config(router_config_id)
+            template_name = 'router/router_config_details.html'
+        except Exception:
+            return redirect(reverse('netbuddyapp:routerconfiglist'))
+
+        if router_config.netbuddy_user_id == request.user.id:
+            return render(request, template_name, {'router_config': router_config})
+        else:
+            return redirect(reverse('netbuddyapp:routerconfiglist'))
 
     elif request.method == 'POST':
 
@@ -49,17 +72,28 @@ def router_config_details(request, router_config_id):
             "actual_method" in form_data
             and form_data["actual_method"] == "LOAD_CONFIG"
         ):
-            device = {}
-            device['device_type'] = 'cisco_ios'
-            device['ip'] = f"{current_netbuddy_user.current_router_ip}"
-            device['username'] = f"{current_netbuddy_user.ssh_username}"
-            device['password'] = f"{current_netbuddy_user.ssh_password}"
-            conn = ConnectHandler(**device)
 
-            conn.send_command(f"copy tftp://172.16.1.5/{router_config_to_load.filename} running-config")
-            conn.disconnect()
+            #Netmiko commands to load a saved running-config
+            try:
+                device = {}
+                device['device_type'] = 'cisco_ios'
+                device['ip'] = f"{current_netbuddy_user.current_router_ip}"
+                device['username'] = f"{current_netbuddy_user.ssh_username}"
+                device['password'] = f"{current_netbuddy_user.ssh_password}"
+                conn = ConnectHandler(**device)
 
-            return redirect(reverse('netbuddyapp:routerconfiglist'))
+                conn.send_command_timing(f"copy tftp://172.16.1.5/{router_config_to_load.filename} running-config")
+                conn.disconnect()
+
+                return redirect(reverse('netbuddyapp:routerconfiglist'))
+
+            except Exception as exception:
+
+                error_text='Uh oh, looks like something went wrong. Check and see is your device is running, connected, and configured properly.'
+                template = 'router/router_current_info.html'
+                context = {'error_text': error_text, 'exception': exception}
+
+                return render(request, template, context)
 
 
         if (
@@ -77,6 +111,9 @@ def router_config_details(request, router_config_id):
             "actual_method" in form_data
             and form_data["actual_method"] == "PUT"
         ):
+
+            #SQL Example
+
             # with sqlite3.connect(Connection.db_path) as conn:
             #     db_cursor = conn.cursor()
 

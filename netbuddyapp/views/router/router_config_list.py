@@ -8,6 +8,10 @@ from netmiko import ConnectHandler
 
 @login_required
 def router_config_list(request):
+    """
+    Handles listing user's saved router config on My Configs;
+    Handles saving new router configs
+    """
     if request.method == 'GET':
         with sqlite3.connect(Connection.db_path) as conn:
             current_user = request.user
@@ -59,22 +63,30 @@ def router_config_list(request):
             netbuddy_user_id=current_user.id
         )
 
-        #Netmiko commands
+        #Netmiko commands to save new running_config
+        
+        try:
+            device = {}
+            device['device_type'] = 'cisco_ios'
+            device['ip'] = f"{current_netbuddy_user.current_router_ip}"
+            device['username'] = f"{current_netbuddy_user.ssh_username}"
+            device['password'] = f"{current_netbuddy_user.ssh_password}"
+            conn = ConnectHandler(**device)
 
-        device = {}
-        device['device_type'] = 'cisco_ios'
-        device['ip'] = f"{current_netbuddy_user.current_router_ip}"
-        device['username'] = f"{current_netbuddy_user.ssh_username}"
-        device['password'] = f"{current_netbuddy_user.ssh_password}"
-        conn = ConnectHandler(**device)
+            conn.send_command(f"copy running-config tftp://172.16.1.5/{form_data['filename']}")
+            conn.disconnect()
 
-        conn.send_command(f"copy running-config tftp://172.16.1.5/{form_data['filename']}")
-        conn.disconnect()
+            # and then save to the db
+            new_config.save()
+            return redirect(reverse('netbuddyapp:routerconfiglist'))
 
+        except Exception as exception:
 
-        # and then save to the db
-        new_config.save()
-        return redirect(reverse('netbuddyapp:routerconfiglist'))
+            error_text='Uh oh, looks like something went wrong. Check and see is your device is running, connected, and configured properly.'
+            template = 'router/router_current_info.html'
+            context = {'error_text': error_text, 'exception': exception}
+
+            return render(request, template, context)
 
         # Original slq query
 

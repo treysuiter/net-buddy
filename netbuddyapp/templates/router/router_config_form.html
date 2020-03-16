@@ -1,32 +1,45 @@
 {% extends 'shared/base.html' %}
 {% load static %}
 {% block content %}
-    <h1>Save Curent Router Configuration</h1>
+
+<h1>Save Curent Router Configuration</h1>
 
     {% if router_config.id is not None%}
-    <form action="{% url 'netbuddyapp:routerconfig' router_config.id %}" method="post">
-        {% else %}
-        <form action="{% url 'netbuddyapp:routerconfiglist' %}" method="post">
-            {% endif %}
-            {% csrf_token %}
-            <fieldset>
-                {% if router_config.id is not None%}
-                <p>Filename: {{ router_config.filename }}</p>
-                {% else %}
-                <label for="title">Filename: </label>
-                <input id="filename" type="text" name="filename" value="{{ router_config.filename }}">
-                {% endif %}
-            </fieldset>
-            <fieldset>
-                <label for="author">Description: </label>
-                <input id="description" type="text" name="description" value="{{ router_config.description }}">
-            </fieldset>
 
-            {% if router_config.id is not None %}
-            <input type="hidden" name="actual_method" value="PUT">
-            <input type="submit" value="Update" />
+    <form action="{% url 'netbuddyapp:routerconfig' router_config.id %}" method="post">
+    {% else %}
+    <form class="router-create-form" action="{% url 'netbuddyapp:routerconfiglist' %}" method="post">
+        {% endif %}
+        {% csrf_token %}
+        <fieldset>
+            {% if router_config.id is not None%}
+            <p>Filename: {{ router_config.filename }}</p>
             {% else %}
-            <input type="submit" value="Create" />
+            <label for="title">Filename: </label>
+            <input id="filename" type="text" name="filename" value="{{ router_config.filename }}">
             {% endif %}
-        </form>
-{% endblock %}
+        </fieldset>
+        <fieldset>
+            <label for="description">Description: </label>
+            <input id="description" type="text" name="description" value="{{ router_config.description }}">
+        </fieldset>
+
+        {% if router_config.id is not None %}
+        <input type="hidden" name="actual_method" value="PUT">
+        <input type="submit" value="Update" />
+        {% else %}
+        <input type="submit" value="Create" />
+        {% endif %}
+    </form>
+   
+    <dialog class="loading-message">
+        Saving. Please wait.
+    </dialog>
+
+
+    {% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'scripts/loadingMessage.js' %}"></script>
+{% endblock %} 
+

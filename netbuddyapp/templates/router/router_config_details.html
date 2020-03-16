@@ -3,7 +3,7 @@
 {% block content%}
 <h1>Filename: {{ router_config.filename }}</h1>
 <h2>Description: {{router_config.description}}</h2>
-<form action="{% url 'netbuddyapp:routerconfig' router_config.id %}" method="POST">
+<form class="router-create-form" action="{% url 'netbuddyapp:routerconfig' router_config.id %}" method="POST">
     {% csrf_token %}
     <input type="hidden" name="actual_method" value="LOAD_CONFIG">
     <button>Load This Config</button>
@@ -17,4 +17,15 @@
     {% csrf_token %}
     <button>Edit</button>
 </form>
+
+ <dialog class="loading-message">
+    
+    
+        Loading. Please wait.
+    </dialog>
+
 {% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'scripts/loadingMessage.js' %}"></script>
+{% endblock %} 

@@ -7,6 +7,58 @@
     <title>NetBuddy</title>
 
     <style>
+        body {
+            background-color: black;
+            background-image: radial-gradient(
+            rgba(0, 150, 0, 0.75), black 120%
+        );
+        height: 100vh;
+        margin: 0;
+        overflow: hidden;
+        padding: 2rem;
+        color: white;
+        font: 1.3rem Inconsolata, monospace;
+        text-shadow: 0 0 5px #C8C8C8;
+        &::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: repeating-linear-gradient(
+            0deg,
+            rgba(black, 0.15),
+            rgba(black, 0.15) 1px,
+            transparent 1px,
+            transparent 2px
+        );
+            pointer-events: none;
+            }
+        }
+
+        ::selection {
+            background: #0080FF;
+            text-shadow: none;
+        }
+
+        pre {
+            margin: 0;
+        }
+
+        button, .nb-button{
+            font: 1.3rem Inconsolata, monospace;
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        a {color: white;}
+        a:visited { text-decoration: none; color:white; }
+        a:hover { text-decoration: none; color:white; }
+        a:focus { text-decoration: none; color:white; }
+        a:hover, a:active { text-decoration: none; color:white }
+
         .navList {
             list-style-type: none;
             display: flex;
@@ -18,9 +70,6 @@
             margin: 0 0.5em;
         }
 
-        .nukeTrey {
-            width: 5%
-        }
     </style>
 </head>
 
@@ -33,7 +82,6 @@
             <li class="navList__route"><a href="{% url 'netbuddyapp:routerconfiglist' %}">My Configs</a></li>
             <li class="navList__route"><a href="{% url 'netbuddyapp:routercurrentinfo' %}">Current Router Config Info</a></li>
             <li class="navList__route"><a href="{% url 'netbuddyapp:logout' %}">Logout</a></li>
-            <li> Hello, {{ user.username }}.</li>
             {% endif %}
         </ol>
     </nav>

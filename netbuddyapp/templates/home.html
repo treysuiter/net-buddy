@@ -2,7 +2,7 @@
 {% load static %}
 {% block content%}
 
-<h1>Welcome to NetBuddy</h1>
+<h1>Hello, {{ user.username }}. Welcome to NetBuddy</h1>
 
     {% if user.is_authenticated %}
      <p>You are currently logged in.</p>

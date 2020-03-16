@@ -16,7 +16,7 @@ def router_config_list_search(request):
 
         form_data = request.GET
 
-        all_router_configs = RouterConfiguration.objects.filter(Q(description__icontains=f"{form_data['searchfield']}") | Q(filename__icontains=f"{form_data['searchfield']}"))
+        all_router_configs = RouterConfiguration.objects.filter(Q(netbuddy_user_id=request.user.id) & (Q(description__icontains=f"{form_data['searchfield']}") | Q(filename__icontains=f"{form_data['searchfield']}")))
         template = 'router/router_config_list.html'
         context = {
             'all_router_configs': all_router_configs

@@ -48,8 +48,12 @@ def router_config_details(request, router_config_id):
     """
 
     if request.method == 'GET':
-        router_config = get_router_config(router_config_id)
-        template_name = 'router/router_config_details.html'
+        
+        try:
+            router_config = get_router_config(router_config_id)
+            template_name = 'router/router_config_details.html'
+        except Exception:
+            return redirect(reverse('netbuddyapp:routerconfiglist'))
 
         if router_config.netbuddy_user_id == request.user.id:
             return render(request, template_name, {'router_config': router_config})

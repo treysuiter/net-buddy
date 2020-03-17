@@ -14,7 +14,6 @@
         );
         height: 100vh;
         margin: 0;
-        overflow: hidden;
         padding: 2rem;
         color: white;
         font: 1.3rem Inconsolata, monospace;
@@ -48,16 +47,19 @@
 
         button, .nb-button{
             font: 1.3rem Inconsolata, monospace;
+            text-shadow: 0 0 5px #C8C8C8;
             background-color: transparent;
             color: white;
             border: 2px solid white;
+            padding: 5px;
+            margin: 2px;
         }
 
-        a {color: white;}
+        {% comment %} a {text-decoration: none, color: white;} {% endcomment %}
+        a:link { text-decoration: none; color:white; }
         a:visited { text-decoration: none; color:white; }
         a:hover { text-decoration: none; color:white; }
         a:focus { text-decoration: none; color:white; }
-        a:hover, a:active { text-decoration: none; color:white }
 
         .navList {
             list-style-type: none;
@@ -70,6 +72,10 @@
             margin: 0 0.5em;
         }
 
+        .active {
+            text-decoration: underline;
+        }
+
     </style>
 </head>
 
@@ -77,12 +83,15 @@
 
      <nav id="site-nav">
         <ol class="navList">
-            <li class="navList__route"><a href="{% url 'netbuddyapp:home' %}">Home</a></li>
+            {% with url_name=request.resolver_match.url_name %}
+            <li class="navList__route {% if url_name == 'home' %}active{% endif %}"><a href="{% url 'netbuddyapp:home' %}">Home</a></li>
             {% if user.is_authenticated %}
-            <li class="navList__route"><a href="{% url 'netbuddyapp:routerconfiglist' %}">My Configs</a></li>
-            <li class="navList__route"><a href="{% url 'netbuddyapp:routercurrentinfo' %}">Current Router Config Info</a></li>
+            |<li class="navList__route {% if url_name == 'routerconfiglist' or url_name == 'routerconfig' or url_name == 'routerconfigedit'%}active{% endif %}"><a href="{% url 'netbuddyapp:routerconfiglist' %}">My Configs</a></li>|
+            <li class="navList__route {% if url_name == 'routercurrentinfo' %}active{% endif %}"><a href="{% url 'netbuddyapp:routercurrentinfo' %}">Current Router Config Info</a></li>|
+            <li class="navList__route {% if url_name == 'routercommands' %}active{% endif %}"><a href="{% url 'netbuddyapp:routercommands' %}">Router Commands</a></li>|
             <li class="navList__route"><a href="{% url 'netbuddyapp:logout' %}">Logout</a></li>
             {% endif %}
+            {% endwith %}
         </ol>
     </nav>
 

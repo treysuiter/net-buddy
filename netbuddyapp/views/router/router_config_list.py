@@ -13,36 +13,8 @@ def router_config_list(request):
     Handles saving new router configs
     """
     if request.method == 'GET':
-        with sqlite3.connect(Connection.db_path) as conn:
-            current_user = request.user
-            conn.row_factory = sqlite3.Row
-            db_cursor = conn.cursor()
-
-            db_cursor.execute("""
-            select
-                r.id,
-                r.filename,
-                r.config_string,
-                r.description,
-                r.created_at,
-                r.netbuddy_user_id
-            from netbuddyapp_routerconfiguration r
-            where r.netbuddy_user_id = ?
-            """, (current_user.id,))
-
-            all_router_configs = []
-            dataset = db_cursor.fetchall()
-
-            for row in dataset:
-                router_config = RouterConfiguration()
-                router_config.id = row['id']
-                router_config.filename = row['filename']
-                router_config.config_string = row['config_string']
-                router_config.description = row['description']
-                router_config.created_at = row['created_at']
-                router_config.netbuddy_user_id = row['netbuddy_user_id']
-
-                all_router_configs.append(router_config)
+        
+        all_router_configs = RouterConfiguration.objects.filter(netbuddy_user_id=request.user.id)
 
         template = 'router/router_config_list.html'
         context = {

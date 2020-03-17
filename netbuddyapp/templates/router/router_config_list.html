@@ -2,7 +2,12 @@
 {% load static %}
 {% block content %}
     <h1>Router Configurations</h1>
+    <p>Please click title name to load, edit description, or delete.</p>
 
+    <form action="{% url 'netbuddyapp:routerconfigform' %}">
+    <button>Add New Configuration</button>
+    </form>
+    <br>
     <form action="{% url 'netbuddyapp:routerconfiglistsearch' %}" method="get">
     {% csrf_token %}
     <input id="searchfield" type="text" name="searchfield">
@@ -12,8 +17,7 @@
     <ul>
     {% for config in all_router_configs %}
         <li>
-            <a href="{% url 'netbuddyapp:routerconfig' config.id %}"> {{ config.filename }} </a> {{ config.description }} {{ config.created_at }}
+            <a href="{% url 'netbuddyapp:routerconfig' config.id %}"> {{ config.filename }} </a>
     {% endfor %}
     </ul>
-    <a href="{% url 'netbuddyapp:routerconfigform' %}"> Click here to add new configuration</a>
 {% endblock %}

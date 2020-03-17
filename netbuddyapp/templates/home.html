@@ -2,12 +2,17 @@
 {% load static %}
 {% block content%}
 
-<h1>Hello, {{ user.username }}. Welcome to NetBuddy</h1>
-
     {% if user.is_authenticated %}
+    <h1>Hello, {{ user.username }}. Welcome to NetBuddy</h1>
      <p>You are currently logged in.</p>
+        {% if ping_info is not None %}
+        <p>Router is online at {{ current_router_ip }}.</p>
+        {% else %}
+        <p>Router is offline.</p>
+        {% endif %}
     {% else %}
      <ul>
+        <h1>Welcome to NetBuddy</h1>
         <li><a href="{% url 'netbuddyapp:login' %}">Login</a></li>
         <li><a href="{% url 'netbuddyapp:register' %}">Register</a></li>       
     </ul>

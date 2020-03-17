@@ -17,4 +17,5 @@ urlpatterns = [
     path('routerconfiglist/<int:router_config_id>/', router_config_details, name='routerconfig'),
     path('routerconfiglist/<int:router_config_id>/form/', router_config_edit_form, name='routerconfigedit'),
     path('routercurrentinfo/', router_current_info, name='routercurrentinfo'),
+    path('routercommands', router_commands, name='routercommands'),
 ]

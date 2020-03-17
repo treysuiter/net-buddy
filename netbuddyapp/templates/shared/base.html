@@ -83,9 +83,9 @@
             {% with url_name=request.resolver_match.url_name %}
             <li class="navList__route {% if url_name == 'home' %}active{% endif %}"><a href="{% url 'netbuddyapp:home' %}">Home</a></li>
             {% if user.is_authenticated %}
-            <li class="navList__route {% if url_name == 'routerconfiglist' %}active{% endif %}"><a href="{% url 'netbuddyapp:routerconfiglist' %}">My Configs</a></li>
-            <li class="navList__route {% if url_name == 'routercurrentinfo' %}active{% endif %}"><a href="{% url 'netbuddyapp:routercurrentinfo' %}">Current Router Config Info</a></li>
-            <li class="navList__route {% if url_name == 'routercommands' %}active{% endif %}"><a href="{% url 'netbuddyapp:routercommands' %}">Router Commands</a></li>
+            |<li class="navList__route {% if url_name == 'routerconfiglist' %}active{% endif %}"><a href="{% url 'netbuddyapp:routerconfiglist' %}">My Configs</a></li>|
+            <li class="navList__route {% if url_name == 'routercurrentinfo' %}active{% endif %}"><a href="{% url 'netbuddyapp:routercurrentinfo' %}">Current Router Config Info</a></li>|
+            <li class="navList__route {% if url_name == 'routercommands' %}active{% endif %}"><a href="{% url 'netbuddyapp:routercommands' %}">Router Commands</a></li>|
             <li class="navList__route"><a href="{% url 'netbuddyapp:logout' %}">Logout</a></li>
             {% endif %}
             {% endwith %}

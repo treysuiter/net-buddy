@@ -3,6 +3,10 @@
 {% block content %}
     <h1>Router Configurations</h1>
 
+    <form action="{% url 'netbuddyapp:routerconfigform' %}">
+    <button>Add New Configuration</button>
+    </form>
+    <br>
     <form action="{% url 'netbuddyapp:routerconfiglistsearch' %}" method="get">
     {% csrf_token %}
     <input id="searchfield" type="text" name="searchfield">
@@ -15,5 +19,4 @@
             <a href="{% url 'netbuddyapp:routerconfig' config.id %}"> <b>{{ config.filename }}</b> </a> {{ config.description }} {{ config.created_at }}
     {% endfor %}
     </ul>
-    <a href="{% url 'netbuddyapp:routerconfigform' %}"> Click here to add new configuration</a>
 {% endblock %}

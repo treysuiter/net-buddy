@@ -1,0 +1,13 @@
+{% extends 'shared/base.html' %}
+{% load static %}
+{% block content%}
+
+<form action="{% url 'netbuddyapp:routercommands' %}" method="get">
+    {% csrf_token %}
+    <input type="hidden" name="actual_method" value="SHOW_IP_INTERFACES_BRIEF">
+    <button>Show IP Interfaces Brief</button>
+</form>
+
+<pre>{{ output }}</pre>
+
+{% endblock %}

@@ -2,7 +2,8 @@
 {% load static %}
 {% block content%}
 
-<h1>Router Commands</h2>
+<h1>Router Commands</h1>
+<h2>Show Commands</h2>
 <div class="router-create-form">
 <form  action="{% url 'netbuddyapp:routercommands' %}" method="get">
 {% csrf_token %}

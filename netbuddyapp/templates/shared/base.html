@@ -47,9 +47,12 @@
 
         button, .nb-button{
             font: 1.3rem Inconsolata, monospace;
+            text-shadow: 0 0 5px #C8C8C8;
             background-color: transparent;
             color: white;
             border: 2px solid white;
+            padding: 5px;
+            margin: 2px;
         }
 
         {% comment %} a {text-decoration: none, color: white;} {% endcomment %}
@@ -83,7 +86,7 @@
             {% with url_name=request.resolver_match.url_name %}
             <li class="navList__route {% if url_name == 'home' %}active{% endif %}"><a href="{% url 'netbuddyapp:home' %}">Home</a></li>
             {% if user.is_authenticated %}
-            |<li class="navList__route {% if url_name == 'routerconfiglist' %}active{% endif %}"><a href="{% url 'netbuddyapp:routerconfiglist' %}">My Configs</a></li>|
+            |<li class="navList__route {% if url_name == 'routerconfiglist' or url_name == 'routerconfig' or url_name == 'routerconfigedit'%}active{% endif %}"><a href="{% url 'netbuddyapp:routerconfiglist' %}">My Configs</a></li>|
             <li class="navList__route {% if url_name == 'routercurrentinfo' %}active{% endif %}"><a href="{% url 'netbuddyapp:routercurrentinfo' %}">Current Router Config Info</a></li>|
             <li class="navList__route {% if url_name == 'routercommands' %}active{% endif %}"><a href="{% url 'netbuddyapp:routercommands' %}">Router Commands</a></li>|
             <li class="navList__route"><a href="{% url 'netbuddyapp:logout' %}">Logout</a></li>

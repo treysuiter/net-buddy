@@ -2,6 +2,7 @@
 {% load static %}
 {% block content %}
     <h1>Router Configurations</h1>
+    <p>Please click title name to load, edit description, or delete.</p>
 
     <form action="{% url 'netbuddyapp:routerconfigform' %}">
     <button>Add New Configuration</button>
@@ -16,7 +17,7 @@
     <ul>
     {% for config in all_router_configs %}
         <li>
-            <a href="{% url 'netbuddyapp:routerconfig' config.id %}"> <b>{{ config.filename }}</b> </a> {{ config.description }} {{ config.created_at }}
+            <a href="{% url 'netbuddyapp:routerconfig' config.id %}"> {{ config.filename }} </a>
     {% endfor %}
     </ul>
 {% endblock %}

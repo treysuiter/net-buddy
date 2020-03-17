@@ -3,24 +3,28 @@
 {% block content%}
 
 <h1>Router Commands</h2>
-
-<form class="router-create-form" action="{% url 'netbuddyapp:routercommands' %}" method="get">
-    {% csrf_token %}
-    <form>
+<div class="router-create-form">
+<form  action="{% url 'netbuddyapp:routercommands' %}" method="get">
+{% csrf_token %}
     <input type="hidden" name="actual_method" value="SHOW_IP_INTERFACES_BRIEF">
-    <button>Show IP Interface Brief</button>
-    </form>
-
-    <form>
+    <button id="show--ip-interface">Show IP Interface Brief</button>
+ </form>  
+<form action="{% url 'netbuddyapp:routercommands' %}" method="get">
+{% csrf_token %}
     <input type="hidden" name="actual_method" value="SHOW_IP_ROUTE">
-    <button>Show IP Route</button>
-    </form>
-
-    <form>
+    <button id="show--ip-route">Show IP Route</button>
+ </form> 
+<form action="{% url 'netbuddyapp:routercommands' %}" method="get">
+{% csrf_token %}
     <input type="hidden" name="actual_method" value="SHOW_VERSION">
-    <button>Show Version</button>
-    </form>
+    <button id="show--version">Show Version</button>
 </form>
+<form action="{% url 'netbuddyapp:routercommands' %}" method="get">
+{% csrf_token %}
+    <input type="hidden" name="actual_method" value="SHOW_IP_PROTOCOLS">
+    <button id="show--protocols">Show IP Protocols</button>
+</form>
+</div>
 
 <dialog class="loading-message">
         Loading. Please wait.

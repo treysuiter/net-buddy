@@ -2,12 +2,35 @@
 {% load static %}
 {% block content%}
 
-<form action="{% url 'netbuddyapp:routercommands' %}" method="get">
+<h1>Router Commands</h2>
+
+<form class="router-create-form" action="{% url 'netbuddyapp:routercommands' %}" method="get">
     {% csrf_token %}
+    <form>
     <input type="hidden" name="actual_method" value="SHOW_IP_INTERFACES_BRIEF">
-    <button>Show IP Interfaces Brief</button>
+    <button>Show IP Interface Brief</button>
+    </form>
+
+    <form>
+    <input type="hidden" name="actual_method" value="SHOW_IP_ROUTE">
+    <button>Show IP Route</button>
+    </form>
+
+    <form>
+    <input type="hidden" name="actual_method" value="SHOW_VERSION">
+    <button>Show Version</button>
+    </form>
 </form>
+
+<dialog class="loading-message">
+        Loading. Please wait.
+</dialog>
+
 
 <pre>{{ output }}</pre>
 
 {% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'scripts/loadingMessage.js' %}"></script>
+{% endblock %} 

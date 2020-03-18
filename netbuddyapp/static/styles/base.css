@@ -59,3 +59,25 @@ a:focus { text-decoration: none; color:white; }
 .active {
     text-decoration: underline;
 }
+
+.scrollbox {
+    height:30%;
+    width:60%;
+    border:1px solid #ccc;
+    overflow:auto;
+}
+
+.commandsscrollbox {
+    height:40%;
+    width:75%;
+    /* border:1px solid #ccc; */
+    overflow:auto;
+}
+
+.listscrollbox {
+    height:40%;
+    width:40%;
+    /* border:1px solid #ccc; */
+    overflow:auto;
+}
+

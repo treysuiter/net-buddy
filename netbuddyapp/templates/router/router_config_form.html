@@ -40,6 +40,8 @@
     {% endblock %}
 
 {% block scripts %}
+    {% if router_config.id is None%}
     <script src="{% static 'scripts/loadingMessage.js' %}"></script>
+    {% endif %}
 {% endblock %} 
 

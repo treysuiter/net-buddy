@@ -21,7 +21,7 @@
         </fieldset>
         <fieldset>
             <label for="description">Description: </label>
-            <input id="description" type="text" name="description" value="{{ router_config.description }}">
+            <textarea id="description" type="text" name="description" value="{{ router_config.description }}">{{ router_config.description }}</textarea>
         </fieldset>
 
         {% if router_config.id is not None %}

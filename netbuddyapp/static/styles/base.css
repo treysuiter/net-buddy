@@ -81,3 +81,8 @@ a:focus { text-decoration: none; color:white; }
     overflow:auto;
 }
 
+#description {
+    height: 6em;
+    width: 50em;
+}
+

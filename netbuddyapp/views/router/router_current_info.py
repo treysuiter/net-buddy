@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from netmiko import ConnectHandler
 from netbuddyapp.models import NetBuddyUser
+from netbuddyapp.helper import get_device_obj
 
 def router_current_info(request):
 
@@ -13,12 +14,7 @@ def router_current_info(request):
 	
     if request.method == 'GET':
         try:
-            device = {}
-            device['device_type'] = 'cisco_ios'
-            device['ip'] = f"{current_netbuddy_user.current_router_ip}"
-            device['username'] = f"{current_netbuddy_user.ssh_username}"
-            device['password'] = f"{current_netbuddy_user.ssh_password}"
-            conn = ConnectHandler(**device)
+            conn = ConnectHandler(**get_device_obj(request))
             
             prompt_output = conn.find_prompt()
             uptime_output = conn.send_command("show version | i uptime")

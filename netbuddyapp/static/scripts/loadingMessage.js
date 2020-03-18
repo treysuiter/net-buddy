@@ -1,6 +1,6 @@
 const loadingMessage = document.querySelector(".loading-message")
 
-document.querySelector(".router-create-form").addEventListener("submit", () => {
+document.querySelector(".router-form").addEventListener("submit", () => {
     loadingMessage.show()
     }
 )

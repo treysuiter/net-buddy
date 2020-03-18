@@ -6,77 +6,10 @@
     <meta charset="utf-8">
     <title>NetBuddy</title>
 
-    <style>
-        body {
-            background-color: black;
-            background-image: radial-gradient(
-            rgba(0, 150, 0, 0.75), black 120%
-        );
-        height: 100vh;
-        margin: 0;
-        padding: 2rem;
-        color: white;
-        font: 1.3rem Inconsolata, monospace;
-        text-shadow: 0 0 5px #C8C8C8;
-        &::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: repeating-linear-gradient(
-            0deg,
-            rgba(black, 0.15),
-            rgba(black, 0.15) 1px,
-            transparent 1px,
-            transparent 2px
-        );
-            pointer-events: none;
-            }
-        }
+    <link rel="stylesheet" href="{% static 'styles/base.css' %}" />
 
-        ::selection {
-            background: #0080FF;
-            text-shadow: none;
-        }
-
-        pre {
-            margin: 0;
-        }
-
-        button, .nb-button{
-            font: 1.3rem Inconsolata, monospace;
-            text-shadow: 0 0 5px #C8C8C8;
-            background-color: transparent;
-            color: white;
-            border: 2px solid white;
-            padding: 5px;
-            margin: 2px;
-        }
-
-        {% comment %} a {text-decoration: none, color: white;} {% endcomment %}
-        a:link { text-decoration: none; color:white; }
-        a:visited { text-decoration: none; color:white; }
-        a:hover { text-decoration: none; color:white; }
-        a:focus { text-decoration: none; color:white; }
-
-        .navList {
-            list-style-type: none;
-            display: flex;
-            border: 1px solid lightgray;
-            padding: 1em;
-        }
-
-        .navList__route {
-            margin: 0 0.5em;
-        }
-
-        .active {
-            text-decoration: underline;
-        }
-
-    </style>
+    {% block css %}
+    {% endblock %}
 </head>
 
 <body>

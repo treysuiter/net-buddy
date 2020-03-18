@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from netbuddyapp.models import RouterConfiguration, NetBuddyUser
 from ..connection import Connection
 from netmiko import ConnectHandler
-from netbuddyapp.helper import get_device_obj
+from netbuddyapp.helper import get_device_obj, nb_exception
 
 
 def get_router_config(router_config_id):
@@ -85,11 +85,11 @@ def router_config_details(request, router_config_id):
 
             except Exception as exception:
 
-                error_text='Uh oh, looks like something went wrong. Check and see is your device is running, connected, and configured properly.'
-                template = 'router/router_current_info.html'
-                context = {'error_text': error_text, 'exception': exception}
+                # error_text='Uh oh, looks like something went wrong. Check and see is your device is running, connected, and configured properly.'
+                # template = 'router/router_current_info.html'
+                # context = {'error_text': error_text, 'exception': exception}
 
-                return render(request, template, context)
+                return nb_exception(request, exception)
 
 
         if (

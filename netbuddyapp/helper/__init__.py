@@ -1,1 +1,2 @@
 from netbuddyapp.helper.get_device_obj import get_device_obj
+from netbuddyapp.helper.nb_exception import nb_exception

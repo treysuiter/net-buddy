@@ -4,7 +4,7 @@
 
 <h1>Router Commands</h1>
 <h2>Show Commands</h2>
-<div class="router-create-form">
+<div class="router-form">
 <form  action="{% url 'netbuddyapp:routercommands' %}" method="get">
 {% csrf_token %}
     <input type="hidden" name="actual_method" value="SHOW_IP_INTERFACES_BRIEF">

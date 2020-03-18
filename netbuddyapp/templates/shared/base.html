@@ -20,7 +20,7 @@
             <li class="navList__route {% if url_name == 'home' %}active{% endif %}"><a href="{% url 'netbuddyapp:home' %}">Home</a></li>
             {% if user.is_authenticated %}
             |<li class="navList__route {% if url_name == 'routerconfig' or url_name == 'routerconfiglist' or url_name == 'routerconfigform' or url_name == 'routerconfigedit'%}active{% endif %}"><a href="{% url 'netbuddyapp:routerconfiglist' %}">My Configs</a></li>|
-            <li class="navList__route {% if url_name == 'routercurrentinfo' %}active{% endif %}"><a href="{% url 'netbuddyapp:routercurrentinfo' %}">Current Router Config Info</a></li>|
+            <li class="navList__route {% if url_name == 'routercurrentinfo' %}active{% endif %}"><a id="current-router-info-link" href="{% url 'netbuddyapp:routercurrentinfo' %}">Current Router Config Info</a></li>|
             <li class="navList__route {% if url_name == 'routercommands' %}active{% endif %}"><a href="{% url 'netbuddyapp:routercommands' %}">Router Commands</a></li>|
             <li class="navList__route"><a href="{% url 'netbuddyapp:logout' %}">Logout</a></li>
             {% endif %}
@@ -28,12 +28,18 @@
         </ol>
     </nav>
 
+    <dialog class="navLoadingMessage">
+    Loading. Please wait.
+    </dialog>
+
     {% block content %}
     {% endblock %}
 
     {% block scripts %}
+    <script src="{% static 'scripts/loadingMessage.js' %}"></script>
     {% endblock scripts %}
 
 </body>
 
 </html>
+ 

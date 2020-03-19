@@ -4,6 +4,7 @@ from netbuddyapp.models import RouterConfiguration, NetBuddyUser
 from ..connection import Connection
 from django.contrib.auth.decorators import login_required
 from netmiko import ConnectHandler
+from netbuddyapp.helper import get_device_obj, nb_exception
 
 
 @login_required
@@ -38,12 +39,7 @@ def router_config_list(request):
         #Netmiko commands to save new running_config
         
         try:
-            device = {}
-            device['device_type'] = 'cisco_ios'
-            device['ip'] = f"{current_netbuddy_user.current_router_ip}"
-            device['username'] = f"{current_netbuddy_user.ssh_username}"
-            device['password'] = f"{current_netbuddy_user.ssh_password}"
-            conn = ConnectHandler(**device)
+            conn = ConnectHandler(**get_device_obj(request))
 
             conn.send_command(f"copy running-config tftp://172.16.1.5/{form_data['filename']}")
             conn.disconnect()
@@ -54,11 +50,13 @@ def router_config_list(request):
 
         except Exception as exception:
 
-            error_text='Uh oh, looks like something went wrong. Check and see is your device is running, connected, and configured properly.'
-            template = 'router/router_current_info.html'
-            context = {'error_text': error_text, 'exception': exception}
+            return nb_exception(request, exception)
 
-            return render(request, template, context)
+            # error_text='Uh oh, looks like something went wrong. Check and see is your device is running, connected, and configured properly.'
+            # template = 'router/router_current_info.html'
+            # context = {'error_text': error_text, 'exception': exception}
+
+            # return render(request, template, context)
 
         # Original slq query
 

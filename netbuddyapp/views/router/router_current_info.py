@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from netmiko import ConnectHandler
 from netbuddyapp.models import NetBuddyUser
+from netbuddyapp.helper import get_device_obj, nb_exception
 
 def router_current_info(request):
 
@@ -13,12 +14,7 @@ def router_current_info(request):
 	
     if request.method == 'GET':
         try:
-            device = {}
-            device['device_type'] = 'cisco_ios'
-            device['ip'] = f"{current_netbuddy_user.current_router_ip}"
-            device['username'] = f"{current_netbuddy_user.ssh_username}"
-            device['password'] = f"{current_netbuddy_user.ssh_password}"
-            conn = ConnectHandler(**device)
+            conn = ConnectHandler(**get_device_obj(request))
             
             prompt_output = conn.find_prompt()
             uptime_output = conn.send_command("show version | i uptime")
@@ -32,9 +28,9 @@ def router_current_info(request):
 
         except Exception as exception:
 
-            error_text='Uh oh, looks like something went wrong. Check and see is your device is running, connected, and configured properly.'
-            template = 'router/router_current_info.html'
-            context = {'error_text': error_text, 'exception': exception}
+            # error_text='Uh oh, looks like something went wrong. Check and see is your device is running, connected, and configured properly.'
+            # template = 'router/router_current_info.html'
+            # context = {'error_text': error_text, 'exception': exception}
 
-            return render(request, template, context)
+            return nb_exception(request, exception)
 

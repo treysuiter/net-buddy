@@ -2,9 +2,9 @@
 {% load static %}
 {% block content%}
 <h2>Filename: {{ router_config.filename }}</h2>
-<h3>Description: {{router_config.description}}</h3>
-<h3>Created: {{router_config.created_at}}</h3>
-<form class="router-create-form" action="{% url 'netbuddyapp:routerconfig' router_config.id %}" method="POST">
+<p>Description: {{router_config.description}}</p>
+<p>Created: {{router_config.created_at}}</p>
+<form class="router-form" action="{% url 'netbuddyapp:routerconfig' router_config.id %}" method="POST">
     {% csrf_token %}
     <input type="hidden" name="actual_method" value="LOAD_CONFIG">
     <button>Load This Config</button>

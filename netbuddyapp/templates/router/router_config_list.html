@@ -14,7 +14,7 @@
     <button type="submit">Search</button>
     </form>
 
-    <ul>
+    <ul class="listscrollbox">
     {% for config in all_router_configs %}
         <li>
             <a href="{% url 'netbuddyapp:routerconfig' config.id %}"> {{ config.filename }} </a>

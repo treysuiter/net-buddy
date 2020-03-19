@@ -1,0 +1,102 @@
+body {
+  background-color: black;
+  background-image: radial-gradient(rgba(0, 150, 0, 0.75), black 120%);
+  height: 100vh;
+  margin: 0;
+  overflow: hidden;
+  padding: 2rem;
+  color: white;
+  font: 1.3rem Inconsolata, monospace;
+  text-shadow: 0 0 5px #C8C8C8;
+}
+body::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15) 1px, transparent 1px, transparent 2px);
+  pointer-events: none;
+}
+
+::selection {
+  background: #0080FF;
+  text-shadow: none;
+}
+
+pre {
+  margin: 0;
+}
+
+button, .nb-button{
+    font: 1.3rem Inconsolata, monospace;
+    text-shadow: 0 0 5px #C8C8C8;
+    background-color: transparent;
+    color: white;
+    border: 2px solid white;
+    padding: 5px;
+    margin: 2px;
+}
+
+/* a {text-decoration: none; color: white;} */
+a:link { text-decoration: none; color:white; }
+a:visited { text-decoration: none; color:white; }
+a:hover { text-decoration: none; color:white; }
+a:focus { text-decoration: none; color:white; }
+
+.navList {
+    list-style-type: none;
+    display: flex;
+    border: 1px solid lightgray;
+    padding: 1em;
+}
+
+.navList__route {
+    margin: 0 0.5em;
+}
+
+.active {
+    text-decoration: underline;
+}
+
+.scrollbox {
+    height:30%;
+    width:60%;
+    border:1px solid #ccc;
+    overflow:auto;
+}
+
+.commandsscrollbox {
+    height:40%;
+    width:75%;
+    /* border:1px solid #ccc; */
+    overflow:auto;
+}
+
+.listscrollbox {
+    height:40%;
+    width:40%;
+    /* border:1px solid #ccc; */
+    overflow:auto;
+}
+
+.navLoadingMessage {
+    border: 16px solid #f3f3f3; /* Light grey */
+    border-top: 16px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+#description {
+    height: 12em;
+    width: 50em;
+}
+

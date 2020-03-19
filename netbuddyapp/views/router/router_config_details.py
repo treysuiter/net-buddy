@@ -81,7 +81,7 @@ def router_config_details(request, router_config_id):
                 conn.send_command_timing(f"copy tftp://172.16.1.5/{router_config_to_load.filename} running-config")
                 conn.disconnect()
 
-                return redirect(reverse('netbuddyapp:routerconfiglist'))
+                return redirect(reverse('netbuddyapp:routercurrentinfo'))
 
             except Exception as exception:
 
@@ -104,7 +104,7 @@ def router_config_details(request, router_config_id):
                 conn.send_command_timing(f'{router_config_to_load.config_string}')
                 conn.disconnect()
 
-                return redirect(reverse('netbuddyapp:routerconfiglist'))
+                return redirect(reverse('netbuddyapp:routercurrentinfo'))
 
             except Exception as exception:
 

@@ -43,7 +43,8 @@ def router_config_list(request):
             conn = ConnectHandler(**get_device_obj(request))
 
             new_config.config_string = conn.send_command("show run")
-            conn.send_command(f"copy running-config tftp://{current_netbuddy_user.tftp_ip}/{form_data['filename']}")
+            if current_netbuddy_user.tftp_ip:
+                conn.send_command(f"copy running-config tftp://{current_netbuddy_user.tftp_ip}/{form_data['filename']}")
             conn.disconnect()
 
             # and then save to the db

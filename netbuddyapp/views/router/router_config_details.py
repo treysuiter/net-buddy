@@ -6,6 +6,7 @@ from netbuddyapp.models import RouterConfiguration, NetBuddyUser
 from ..connection import Connection
 from netmiko import ConnectHandler
 from netbuddyapp.helper import get_device_obj, nb_exception
+from ping3 import ping
 
 
 def get_router_config(router_config_id):
@@ -73,6 +74,9 @@ def router_config_details(request, router_config_id):
             "actual_method" in form_data
             and form_data["actual_method"] == "TFTP_LOAD_CONFIG"
         ):
+            # if ping(current_netbuddy_user.tftp_ip) == None:
+
+            #     return nb_exception(request, exception)
 
             #Netmiko commands to load a saved running-config
             try:

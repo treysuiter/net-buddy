@@ -5,11 +5,20 @@
     {% if user.is_authenticated %}
     <h1>Hello, {{ user.username }}. Welcome to NetBuddy</h1>
      <p>You are currently logged in.</p>
-        {% if ping_info is not None %}
-        <p>Router is online at {{ current_router_ip }}.</p>
+        {% if router_ping_info is not None %}
+        <p>Router is online at {{ current_netbuddy_user.current_router_ip }}.</p>
         {% else %}
         <p>Router is offline.</p>
         {% endif %}
+        {% if tftp_ping_info is not None %}
+        <p>TFTP is online at {{ current_netbuddy_user.tftp_ip }}.</p>
+        {% else %}
+        <p>TFTP is offline or not configured.</p>
+        {% endif %}
+        <p> SSH Username: {{ current_netbuddy_user.ssh_username }}</p>
+        <p> SSH Password: {{ current_netbuddy_user.ssh_password }}</p>
+        <p> Currently Configured Router IP: {{ current_netbuddy_user.current_router_ip}}</p>
+        <p> Currently Configured TFTP IP: {{ current_netbuddy_user.tftp_ip}}</p>
     {% else %}
      <ul>
         <h1>Welcome to NetBuddy</h1>

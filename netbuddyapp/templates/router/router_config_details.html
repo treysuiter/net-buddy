@@ -5,11 +5,13 @@
 <p>Description: {{router_config.description}}</p>
 <p>Created: {{router_config.created_at}}</p>
 <div class="router-form">
+{% if current_netbuddy_user.tftp_ip is not None %}
 <form action="{% url 'netbuddyapp:routerconfig' router_config.id %}" method="POST">
     {% csrf_token %}
     <input type="hidden" name="actual_method" value="TFTP_LOAD_CONFIG">
     <button>Load This Config via TFTP</button>
 </form>
+{% endif %}
 {% if router_config.config_string is not None %}
 <form action="{% url 'netbuddyapp:routerconfig' router_config.id %}" method="POST">
     {% csrf_token %}

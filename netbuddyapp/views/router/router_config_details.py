@@ -6,6 +6,7 @@ from netbuddyapp.models import RouterConfiguration, NetBuddyUser
 from ..connection import Connection
 from netmiko import ConnectHandler
 from netbuddyapp.helper import get_device_obj, nb_exception
+from ping3 import ping
 
 
 def get_router_config(router_config_id):
@@ -49,6 +50,9 @@ def router_config_details(request, router_config_id):
     """
 
     if request.method == 'GET':
+
+        current_user = request.user
+        current_netbuddy_user = NetBuddyUser.objects.get(user_id=current_user.id)
         
         try:
             router_config = get_router_config(router_config_id)
@@ -57,7 +61,7 @@ def router_config_details(request, router_config_id):
             return redirect(reverse('netbuddyapp:routerconfiglist'))
 
         if router_config.netbuddy_user_id == request.user.id:
-            return render(request, template_name, {'router_config': router_config})
+            return render(request, template_name, {'router_config': router_config, 'current_netbuddy_user': current_netbuddy_user})
         else:
             return redirect(reverse('netbuddyapp:routerconfiglist'))
 
@@ -73,23 +77,36 @@ def router_config_details(request, router_config_id):
             "actual_method" in form_data
             and form_data["actual_method"] == "TFTP_LOAD_CONFIG"
         ):
+            
+            tftp_ping_check = ping(current_netbuddy_user.tftp_ip)
 
-            #Netmiko commands to load a saved running-config
-            try:
-                conn = ConnectHandler(**get_device_obj(request))
+            if tftp_ping_check is not None:
 
-                conn.send_command_timing(f"copy tftp://{current_netbuddy_user.tftp_ip}/{router_config_to_load.filename} running-config")
-                conn.disconnect()
+                #Netmiko commands to load a saved running-config
+                try:
+                    conn = ConnectHandler(**get_device_obj(request))
 
-                return redirect(reverse('netbuddyapp:routercurrentinfo'))
+                    output = conn.send_command_timing(f"copy tftp://{current_netbuddy_user.tftp_ip}/{router_config_to_load.filename} running-config")
 
-            except Exception as exception:
+                    if "Error opening" and "(No such file or directory)" in output:
 
-                # error_text='Uh oh, looks like something went wrong. Check and see is your device is running, connected, and configured properly.'
-                # template = 'router/router_current_info.html'
-                # context = {'error_text': error_text, 'exception': exception}
+                        return nb_exception(request, "File not found on TFTP server")
 
-                return nb_exception(request, exception)
+                    conn.disconnect()
+
+                    return redirect(reverse('netbuddyapp:routercurrentinfo'))
+
+                except Exception as exception:
+
+                    # error_text='Uh oh, looks like something went wrong. Check and see is your device is running, connected, and configured properly.'
+                    # template = 'router/router_current_info.html'
+                    # context = {'error_text': error_text, 'exception': exception}
+
+                    return nb_exception(request, exception)
+
+            else:
+
+                return nb_exception(request, "TFTP server is not online")
 
         if (
             "actual_method" in form_data
@@ -100,7 +117,7 @@ def router_config_details(request, router_config_id):
             try:
                 conn = ConnectHandler(**get_device_obj(request))
 
-                conn.send_command_timing('conf term')
+                conn.send_command('conf term')
                 conn.send_command_timing(f'{router_config_to_load.config_string}')
                 conn.disconnect()
 

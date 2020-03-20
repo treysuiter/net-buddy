@@ -7,6 +7,7 @@ class NetBuddyUser(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     current_router_ip = models.CharField(max_length=55, null=True)
     current_vlan_ip = models.CharField(max_length=55, null=True)
+    tftp_ip = models.CharField(max_length=55, null=True)
     ssh_username = models.CharField(max_length=55)
     ssh_password = models.CharField(max_length=55)
    

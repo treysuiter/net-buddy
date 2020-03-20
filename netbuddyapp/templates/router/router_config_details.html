@@ -4,11 +4,19 @@
 <h2>Filename: {{ router_config.filename }}</h2>
 <p>Description: {{router_config.description}}</p>
 <p>Created: {{router_config.created_at}}</p>
-<form class="router-form" action="{% url 'netbuddyapp:routerconfig' router_config.id %}" method="POST">
+<div class="router-form">
+<form action="{% url 'netbuddyapp:routerconfig' router_config.id %}" method="POST">
     {% csrf_token %}
-    <input type="hidden" name="actual_method" value="LOAD_CONFIG">
-    <button>Load This Config</button>
+    <input type="hidden" name="actual_method" value="TFTP_LOAD_CONFIG">
+    <button>Load This Config via TFTP</button>
 </form>
+{% if router_config.config_string is not None %}
+<form action="{% url 'netbuddyapp:routerconfig' router_config.id %}" method="POST">
+    {% csrf_token %}
+    <input type="hidden" name="actual_method" value="GLOBAL_LOAD_CONFIG">
+    <button>Load This Config via Global Config</button>
+</form>
+{% endif %}
 <form action="{% url 'netbuddyapp:routerconfigedit' router_config.id %}" method="GET">
     {% csrf_token %}
     <button>Edit Description</button>
@@ -18,6 +26,7 @@
     <input type="hidden" name="actual_method" value="DELETE">
     <button>Delete</button>
 </form>
+</div>
 
  <dialog class="loading-message">
     

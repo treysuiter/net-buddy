@@ -71,7 +71,7 @@ def router_config_details(request, router_config_id):
 
         if (
             "actual_method" in form_data
-            and form_data["actual_method"] == "LOAD_CONFIG"
+            and form_data["actual_method"] == "TFTP_LOAD_CONFIG"
         ):
 
             #Netmiko commands to load a saved running-config
@@ -81,7 +81,30 @@ def router_config_details(request, router_config_id):
                 conn.send_command_timing(f"copy tftp://172.16.1.5/{router_config_to_load.filename} running-config")
                 conn.disconnect()
 
-                return redirect(reverse('netbuddyapp:routerconfiglist'))
+                return redirect(reverse('netbuddyapp:routercurrentinfo'))
+
+            except Exception as exception:
+
+                # error_text='Uh oh, looks like something went wrong. Check and see is your device is running, connected, and configured properly.'
+                # template = 'router/router_current_info.html'
+                # context = {'error_text': error_text, 'exception': exception}
+
+                return nb_exception(request, exception)
+
+        if (
+            "actual_method" in form_data
+            and form_data["actual_method"] == "GLOBAL_LOAD_CONFIG"
+        ):
+
+            #Netmiko commands to load a saved running-config
+            try:
+                conn = ConnectHandler(**get_device_obj(request))
+
+                conn.send_command_timing('conf term')
+                conn.send_command_timing(f'{router_config_to_load.config_string}')
+                conn.disconnect()
+
+                return redirect(reverse('netbuddyapp:routercurrentinfo'))
 
             except Exception as exception:
 

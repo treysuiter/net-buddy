@@ -33,6 +33,7 @@ def router_config_list(request):
         new_config = RouterConfiguration(
             filename=form_data['filename'],
             description=form_data['description'],
+            # config_string="",
             netbuddy_user_id=current_user.id
         )
 
@@ -41,6 +42,7 @@ def router_config_list(request):
         try:
             conn = ConnectHandler(**get_device_obj(request))
 
+            new_config.config_string = conn.send_command("show run")
             conn.send_command(f"copy running-config tftp://172.16.1.5/{form_data['filename']}")
             conn.disconnect()
 

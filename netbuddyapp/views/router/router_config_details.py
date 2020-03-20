@@ -50,6 +50,9 @@ def router_config_details(request, router_config_id):
     """
 
     if request.method == 'GET':
+
+        current_user = request.user
+        current_netbuddy_user = NetBuddyUser.objects.get(user_id=current_user.id)
         
         try:
             router_config = get_router_config(router_config_id)
@@ -58,7 +61,7 @@ def router_config_details(request, router_config_id):
             return redirect(reverse('netbuddyapp:routerconfiglist'))
 
         if router_config.netbuddy_user_id == request.user.id:
-            return render(request, template_name, {'router_config': router_config})
+            return render(request, template_name, {'router_config': router_config, 'current_netbuddy_user': current_netbuddy_user})
         else:
             return redirect(reverse('netbuddyapp:routerconfiglist'))
 
@@ -74,26 +77,31 @@ def router_config_details(request, router_config_id):
             "actual_method" in form_data
             and form_data["actual_method"] == "TFTP_LOAD_CONFIG"
         ):
-            # if ping(current_netbuddy_user.tftp_ip) == None:
+            
+            tftp_ping_check = ping(current_netbuddy_user.tftp_ip)
 
-            #     return nb_exception(request, exception)
+            if tftp_ping_check is not None:
 
-            #Netmiko commands to load a saved running-config
-            try:
-                conn = ConnectHandler(**get_device_obj(request))
+                #Netmiko commands to load a saved running-config
+                try:
+                    conn = ConnectHandler(**get_device_obj(request))
 
-                conn.send_command_timing(f"copy tftp://{current_netbuddy_user.tftp_ip}/{router_config_to_load.filename} running-config")
-                conn.disconnect()
+                    conn.send_command_timing(f"copy tftp://{current_netbuddy_user.tftp_ip}/{router_config_to_load.filename} running-config")
+                    conn.disconnect()
 
-                return redirect(reverse('netbuddyapp:routercurrentinfo'))
+                    return redirect(reverse('netbuddyapp:routercurrentinfo'))
 
-            except Exception as exception:
+                except Exception as exception:
 
-                # error_text='Uh oh, looks like something went wrong. Check and see is your device is running, connected, and configured properly.'
-                # template = 'router/router_current_info.html'
-                # context = {'error_text': error_text, 'exception': exception}
+                    # error_text='Uh oh, looks like something went wrong. Check and see is your device is running, connected, and configured properly.'
+                    # template = 'router/router_current_info.html'
+                    # context = {'error_text': error_text, 'exception': exception}
 
-                return nb_exception(request, exception)
+                    return nb_exception(request, exception)
+
+            else:
+
+                return nb_exception(request, "TFTP server is not online")
 
         if (
             "actual_method" in form_data
@@ -104,7 +112,7 @@ def router_config_details(request, router_config_id):
             try:
                 conn = ConnectHandler(**get_device_obj(request))
 
-                conn.send_command_timing('conf term')
+                conn.send_command('conf term')
                 conn.send_command_timing(f'{router_config_to_load.config_string}')
                 conn.disconnect()
 

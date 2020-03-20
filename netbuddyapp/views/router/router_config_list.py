@@ -5,7 +5,7 @@ from ..connection import Connection
 from django.contrib.auth.decorators import login_required
 from netmiko import ConnectHandler
 from netbuddyapp.helper import get_device_obj, nb_exception
-
+from ping3 import ping
 
 @login_required
 def router_config_list(request):
@@ -43,8 +43,12 @@ def router_config_list(request):
             conn = ConnectHandler(**get_device_obj(request))
 
             new_config.config_string = conn.send_command("show run")
+            
             if current_netbuddy_user.tftp_ip:
-                conn.send_command(f"copy running-config tftp://{current_netbuddy_user.tftp_ip}/{form_data['filename']}")
+                tftp_ping_check = ping(current_netbuddy_user.tftp_ip)
+                if tftp_ping_check is not None:
+                    conn.send_command(f"copy running-config tftp://{current_netbuddy_user.tftp_ip}/{form_data['filename']}")
+
             conn.disconnect()
 
             # and then save to the db

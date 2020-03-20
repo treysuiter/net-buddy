@@ -9,10 +9,16 @@ def home(request):
         current_user = request.user
         current_netbuddy_user = NetBuddyUser.objects.get(user_id=current_user.id)
 
-        ping_info = ping(current_netbuddy_user.current_router_ip)
+        router_ping_info = ping(current_netbuddy_user.current_router_ip)
+
+        if current_netbuddy_user.tftp_ip is not None:
+            tftp_ping_info = ping(current_netbuddy_user.tftp_ip)
+        else:
+            tftp_ping_info = None
+
 
         template = 'home.html'
-        context = {'ping_info': ping_info, 'current_router_ip': current_netbuddy_user.current_router_ip}
+        context = {'router_ping_info': router_ping_info, 'tftp_ping_info': tftp_ping_info,'current_netbuddy_user': current_netbuddy_user}
 
         return render(request, template, context)
 

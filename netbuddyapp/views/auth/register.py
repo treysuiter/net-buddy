@@ -11,6 +11,7 @@ def register(request):
         form = RegisterForm(request.POST)
         if form.is_valid():
             user = form.save()
+            user.netbuddyuser.tftp_ip = form.cleaned_data.get('tftp_ip')
             user.netbuddyuser.current_router_ip = form.cleaned_data.get('current_router_ip')
             user.netbuddyuser.current_vlan_ip = form.cleaned_data.get('current_vlan_ip')
             user.netbuddyuser.ssh_username = form.cleaned_data.get('ssh_username')

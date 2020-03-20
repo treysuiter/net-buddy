@@ -78,7 +78,7 @@ def router_config_details(request, router_config_id):
             try:
                 conn = ConnectHandler(**get_device_obj(request))
 
-                conn.send_command_timing(f"copy tftp://172.16.1.5/{router_config_to_load.filename} running-config")
+                conn.send_command_timing(f"copy tftp://{current_netbuddy_user.tftp_ip}/{router_config_to_load.filename} running-config")
                 conn.disconnect()
 
                 return redirect(reverse('netbuddyapp:routercurrentinfo'))

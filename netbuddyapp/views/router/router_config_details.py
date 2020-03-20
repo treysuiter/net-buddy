@@ -86,7 +86,12 @@ def router_config_details(request, router_config_id):
                 try:
                     conn = ConnectHandler(**get_device_obj(request))
 
-                    conn.send_command_timing(f"copy tftp://{current_netbuddy_user.tftp_ip}/{router_config_to_load.filename} running-config")
+                    output = conn.send_command_timing(f"copy tftp://{current_netbuddy_user.tftp_ip}/{router_config_to_load.filename} running-config")
+
+                    if "Error opening" and "(No such file or directory)" in output:
+
+                        return nb_exception(request, "File not found on TFTP server")
+
                     conn.disconnect()
 
                     return redirect(reverse('netbuddyapp:routercurrentinfo'))

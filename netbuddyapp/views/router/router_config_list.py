@@ -66,7 +66,7 @@ def router_config_list(request):
                 return nb_exception(request, exception)
         else:
             template = 'router/router_config_form.html'
-            context = {'bad_file_name': 'Filename can only be letters, numbers, dashes or underscores.'}
+            context = {'bad_file_name': 'Filename can contain letters, numbers, dashes or underscores.'}
 
             return render(request, template, context)
             # error_text='Uh oh, looks like something went wrong. Check and see is your device is running, connected, and configured properly.'

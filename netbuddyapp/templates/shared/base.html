@@ -22,7 +22,10 @@
             |<li class="navList__route {% if url_name == 'routerconfig' or url_name == 'routerconfiglist' or url_name == 'routerconfigform' or url_name == 'routerconfigedit'%}active{% endif %}"><a href="{% url 'netbuddyapp:routerconfiglist' %}">My Router Configs</a></li>|
             <li class="navList__route {% if url_name == 'routercurrentinfo' %}active{% endif %}"><a id="current-router-info-link" href="{% url 'netbuddyapp:routercurrentinfo' %}">Current Router Config Info</a></li>|
             <li class="navList__route {% if url_name == 'routercommands' %}active{% endif %}"><a href="{% url 'netbuddyapp:routercommands' %}">Router Show Commands</a></li>|
-            <li class="navList__route"><a href="{% url 'netbuddyapp:logout' %}">Logout</a></li>
+            <li class="navList__route"><a href="{% url 'netbuddyapp:logout' %}">Logout</a></li>|
+            <li class="navList__route"><a href='http://github.com/treysuiter/net-buddy/blob/master/README.md' target="_blank">About</a></li>
+            {% else %}
+            <li>Welcome to NetBuddy! Your Cisco config file assistant.</li>
             {% endif %}
             {% endwith %}
         </ol>

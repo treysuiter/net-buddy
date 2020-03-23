@@ -21,7 +21,6 @@
         <p> Currently Configured TFTP IP: {{ current_netbuddy_user.tftp_ip}}</p>
     {% else %}
      <ul>
-        <h1>Welcome to NetBuddy</h1>
         <form action="{% url 'netbuddyapp:login' %}">
         <input type="submit" class="nb-button" value="Login" />
         </form>

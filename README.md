@@ -114,13 +114,13 @@ connection with the device and send it commands.
 
 7. I don't like the blue background.
 
-[css-tricks.com]: (https://css-tricks.com)
+https://css-tricks.com
 
 8. Wow! This is really cool. I would love to have the person who created this on my team.
 
 - Well shucks, thanks! Good news; I am looking for a career. Feel free to get in touch:
 
-[linkedin.com/in/treysuiter]: (https://linkedin.com/in/treysuiter)
+https://linkedin.com/in/treysuiter
 
 9. I used this app for my multi-billion dollar business and now I have compromised its security.
 

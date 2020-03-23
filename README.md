@@ -98,9 +98,9 @@ connection with the device and send it commands.
 
 - When loading configurations, elements of the config file are only over-written if there was an entry for the same element in the previous configuration. Otherwise, it is added. It is advised to start from a base configuration including only the two steps listed under the Router portion of the Setup instructions before you load a configuration.
 
-4. Seems like this could work a lot better if you just used a serial connection.
+4. I sure would like to use a serial connection with NetBuddy.
 
-- You would be correct. The next step for NetBuddy is to integrate PySerial and then you would not need a base configuration to start with.
+- The next step for NetBuddy is to integrate PySerial and then you would not need a base configuration to start with.
 
 5. What if I want to use NetBuddy for a switch?
 
@@ -114,6 +114,9 @@ connection with the device and send it commands.
 
 - Well shucks, thanks! Good news; I am looking for a career. Feel free to get in touch: linkedin.com/in/treysuiter
 
+8. Where can I get information about the Netmiko library for my own project?
+
+- pynet.twb-tech.com/blog/automation/netmiko.html
 
 
 

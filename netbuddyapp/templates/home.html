@@ -20,7 +20,7 @@
         <p> Currently Configured Router IP: {{ current_netbuddy_user.current_router_ip}}</p>
         <p> Currently Configured TFTP IP: {{ current_netbuddy_user.tftp_ip}}</p>
     {% else %}
-    <h1> Welcome to NetBuddy; your Cisco config file assistant.</h1>
+    <h2> Welcome to NetBuddy; your Cisco config file assistant.</h2>
      <ul>
         <form action="{% url 'netbuddyapp:login' %}">
         <input type="submit" class="nb-button" value="Login" />

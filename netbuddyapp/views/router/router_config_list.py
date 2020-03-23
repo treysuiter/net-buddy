@@ -30,8 +30,14 @@ def router_config_list(request):
         #regex to make sure file name has no special characters
     
         form_data = request.POST
+        unique_filename_check = None
+
+        try:
+            unique_filename_check = RouterConfiguration.objects.get(filename=form_data['filename'])
+        except Exception:
+            pass
         
-        if re.match("^[A-Za-z0-9_-]*$", form_data['filename']):
+        if re.match("^[A-Za-z0-9_-]*$", form_data['filename']) and unique_filename_check is None:
             current_user = request.user
             current_netbuddy_user = NetBuddyUser.objects.get(user_id=current_user.id)
             
@@ -64,6 +70,14 @@ def router_config_list(request):
             except Exception as exception:
 
                 return nb_exception(request, exception)
+        
+        elif unique_filename_check is not None:
+            template = 'router/router_config_form.html'
+            context = {'bad_file_name': 'Filename must be unique.'}
+
+            return render(request, template, context)
+
+
         else:
             template = 'router/router_config_form.html'
             context = {'bad_file_name': 'Filename can contain letters, numbers, dashes or underscores.'}

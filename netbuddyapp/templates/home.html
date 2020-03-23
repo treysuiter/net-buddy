@@ -3,7 +3,7 @@
 {% block content%}
 
     {% if user.is_authenticated %}
-    <h1>Hello, {{ user.username }}. Welcome to NetBuddy</h1>
+    <h1>Hello, {{ user.username }}.</h1>
      <p>You are currently logged in.</p>
         {% if router_ping_info is not None %}
         <p>Router is online at {{ current_netbuddy_user.current_router_ip }}.</p>
@@ -21,9 +21,11 @@
         <p> Currently Configured TFTP IP: {{ current_netbuddy_user.tftp_ip}}</p>
     {% else %}
      <ul>
-        <h1>Welcome to NetBuddy</h1>
-        <li><a href="{% url 'netbuddyapp:login' %}">Login</a></li>
-        <li><a href="{% url 'netbuddyapp:register' %}">Register</a></li>       
+        <form action="{% url 'netbuddyapp:login' %}">
+        <input type="submit" class="nb-button" value="Login" />
+        </form>
+        <form action="{% url 'netbuddyapp:register' %}">
+        <input type="submit" class="nb-button" value="Register" />     
     </ul>
     {% endif %}
 {% endblock %}

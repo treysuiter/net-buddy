@@ -70,9 +70,11 @@ connection with the device and send it commands.
   - `python manage.py makemigrations netbuddyapp`
   - `python manage.py migrate`
 
-5. Create a superuser for your local version of the app.
+5. Create a superuser for your local version of the app (make sure you do this before loading fixtures).
 
   - `python manage.py createsuperuser`
+
+### Did you create a superuser? If so, carry on. If not, please go back to step 5.
 
 6. Populate your database with initial data from fixtures files: (NOTE: every time you run this it will remove existing data and repopulate the tables) 
 
@@ -106,15 +108,19 @@ connection with the device and send it commands.
 
 - NetBuddy is currently not designed to work with switches. Saving and recalling switch functionality would need to take VLANs into account, which I have not (besides asking for a VLAN ip address during registration to be used ina future NetBuddy).
 
-6. I don't like the blue background.
+6. I would like to edit my profile information as well as router and TFTP server ip but alas I cannot.
+
+- Currently, NetBuddy does not have the ability to edit profile information (it's on the list). Please create a new user with the proper information in the meantime.
+
+7. I don't like the blue background.
 
 - css-tricks.com
 
-7. Wow! This is really cool. I would love to have the person who created this on my team.
+8. Wow! This is really cool. I would love to have the person who created this on my team.
 
 - Well shucks, thanks! Good news; I am looking for a career. Feel free to get in touch: linkedin.com/in/treysuiter
 
-8. Where can I get information about the Netmiko library for my own project?
+9. Where can I get information about the Netmiko library for my own project?
 
 - pynet.twb-tech.com/blog/automation/netmiko.html
 

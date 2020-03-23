@@ -126,7 +126,7 @@ connection with the device and send it commands.
 
 10. Where can I get information about the Netmiko library for my own project?
 
-- pynet.twb-tech.com/blog/automation/netmiko.html
+- https://pynet.twb-tech.com/blog/automation/netmiko.html
 
 
 

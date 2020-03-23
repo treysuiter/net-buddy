@@ -106,7 +106,7 @@ connection with the device and send it commands.
 
 5. What if I want to use NetBuddy for a switch?
 
-- NetBuddy is currently not designed to work with switches. Saving and recalling switch functionality would need to take VLANs into account, which I have not (besides asking for a VLAN ip address during registration to be used ina future NetBuddy).
+- NetBuddy is currently not designed to work with switches. Saving and recalling switch functionality would need to take VLANs into account, which I have not (besides asking for a VLAN ip address during registration to be used in a future NetBuddy).
 
 6. I would like to edit my profile information as well as router and TFTP server ip but alas I cannot.
 

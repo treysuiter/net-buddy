@@ -120,7 +120,11 @@ connection with the device and send it commands.
 
 - Well shucks, thanks! Good news; I am looking for a career. Feel free to get in touch: linkedin.com/in/treysuiter
 
-9. Where can I get information about the Netmiko library for my own project?
+9. I used this app for my multi-billion dollar business and now I have compromised its security.
+
+- Very unfortunate. NetBuddy is intended for student use only; not professional. Also, if you would let me know the name of the business as I suspect they may have an opening soon.
+
+10. Where can I get information about the Netmiko library for my own project?
 
 - pynet.twb-tech.com/blog/automation/netmiko.html
 

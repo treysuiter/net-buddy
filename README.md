@@ -106,7 +106,7 @@ connection with the device and send it commands.
 
 5. What if I want to use NetBuddy for a switch?
 
-- NetBuddy is currently not designed to work with switches. Saving and recalling switch functionality would need to take VLANs into account, which I have not (besides asking for a VLAN ip address during registration to be used ina future NetBuddy).
+- NetBuddy is currently not designed to work with switches. Saving and recalling switch functionality would need to take VLANs into account, which I have not (besides asking for a VLAN ip address during registration to be used in a future NetBuddy).
 
 6. I would like to edit my profile information as well as router and TFTP server ip but alas I cannot.
 
@@ -114,15 +114,19 @@ connection with the device and send it commands.
 
 7. I don't like the blue background.
 
-- css-tricks.com
+- https://css-tricks.com
 
 8. Wow! This is really cool. I would love to have the person who created this on my team.
 
-- Well shucks, thanks! Good news; I am looking for a career. Feel free to get in touch: linkedin.com/in/treysuiter
+- Well shucks, thanks! Good news; I am looking for a career. Feel free to get in touch: https://linkedin.com/in/treysuiter
 
-9. Where can I get information about the Netmiko library for my own project?
+9. I used this app for my multi-billion dollar business and now I have compromised its security.
 
-- pynet.twb-tech.com/blog/automation/netmiko.html
+- Very unfortunate. NetBuddy is intended for student use only; not professional. Also, if you would let me know the name of the business as I suspect they may have an opening soon.
+
+10. Where can I get information about the Netmiko library for my own project?
+
+- https://pynet.twb-tech.com/blog/automation/netmiko.html
 
 
 

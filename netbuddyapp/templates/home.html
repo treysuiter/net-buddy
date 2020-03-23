@@ -20,12 +20,19 @@
         <p> Currently Configured Router IP: {{ current_netbuddy_user.current_router_ip}}</p>
         <p> Currently Configured TFTP IP: {{ current_netbuddy_user.tftp_ip}}</p>
     {% else %}
+    <h2> Welcome to NetBuddy; your Cisco config file assistant.</h2>
+    <p>Note: NetBuddy is not affiliated with Cisco in any way.</p>
+    <p>Intended for student use only; not professional.</p>
      <ul>
         <form action="{% url 'netbuddyapp:login' %}">
         <input type="submit" class="nb-button" value="Login" />
         </form>
         <form action="{% url 'netbuddyapp:register' %}">
-        <input type="submit" class="nb-button" value="Register" />     
+        <input type="submit" class="nb-button" value="Register" />
+        </form>
+        <form action='http://github.com/treysuiter/net-buddy/blob/master/README.md' target="_blank">
+        <input type="submit" class="nb-button" value="NetBuddy Info" />
+        </form>
     </ul>
     {% endif %}
 {% endblock %}

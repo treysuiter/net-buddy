@@ -5,7 +5,10 @@ from django.contrib.auth.models import User
 #Form to for NetbuddyUser model properties
 
 class RegisterForm(UserCreationForm):
-    
+
+    """
+    Form to extend Django's registration
+    """
     current_router_ip = forms.CharField(max_length=55)
     current_vlan_ip = forms.CharField(max_length=55, required=False, help_text='(Optional)')
     tftp_ip = forms.CharField(max_length=55, required=False, help_text='(Optional)')

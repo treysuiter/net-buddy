@@ -7,6 +7,9 @@ from netbuddyapp.forms.register_form import RegisterForm
 #View for registering new users; uses RegisterForm for NetbuddyUser fields
 
 def register(request):
+    """
+    Handles saving new user with RegisterForm form. Will check for validation and place in cleaned data.
+    """
     if request.method == 'POST':
         form = RegisterForm(request.POST)
         if form.is_valid():

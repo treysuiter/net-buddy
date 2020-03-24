@@ -4,6 +4,11 @@ from netbuddyapp.models import NetBuddyUser
 
 def home(request):
 
+    """
+    Returns render data for home screen. Will ping router and TFTP server and send status to home template. 
+    Also sends user info to home template.
+    """
+
     if request.method == 'GET' and request.user.id:
 
         current_user = request.user

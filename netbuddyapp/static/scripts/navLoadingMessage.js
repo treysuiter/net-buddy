@@ -1,5 +1,6 @@
-const navLoadingMessage = document.querySelector(".navLoadingMessage")
+// Handles event listeners that trigger loading icon
 
+const navLoadingMessage = document.querySelector(".navLoadingMessage")
 
 document.querySelector(".navList").addEventListener("click", (evt) => {
     if (evt.target.id === "current-router-info-link") {

@@ -6,6 +6,11 @@ from .router_config_details import get_router_config
 
 @login_required
 def router_config_form(request):
+
+    """
+    Form for new config
+    """
+
     if request.method == 'GET':
         template = 'router/router_config_form.html'
         context = {}
@@ -15,6 +20,10 @@ def router_config_form(request):
 
 @login_required
 def router_config_edit_form(request, router_config_id):
+
+    """
+    Form for editing config
+    """
 
     if request.method == 'GET':
         router_config = get_router_config(router_config_id)

@@ -118,9 +118,12 @@ def router_config_details(request, router_config_id):
                 conn = ConnectHandler(**get_device_obj(request))
 
                 # conn.send_command('conf term')
+                test_string = router_config_to_load.config_string
+
+                result = test_string.find('version')
+                print(result, 'this is where version is')
                 conn.send_command_timing('conf term')
                 output = conn.send_command_timing(f'{router_config_to_load.config_string}')
-                print(output, 'this is output')
                 conn.disconnect()
 
                 return redirect(reverse('netbuddyapp:routercurrentinfo'))

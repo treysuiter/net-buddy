@@ -90,9 +90,9 @@ connection with the device and send it commands.
 
 1. How are configurations saved and loaded?
 
-- NetBuddy will save and load configurations via the database as well as the TFTP server if you specified one during registration. You are able to choose where you load from but NetBuddy will save to both the database and the TFTP server (if available) automatically.
+- NetBuddy will save and load configurations via the database in string format as well as the TFTP server (if you specified one during registration). You are able to choose where you load from but NetBuddy will save to both the database and the TFTP server (if available) automatically.
 
-2. How can I check if my connections the router and TFTP server are working?
+2. How can I check if my connections to the router and TFTP server are working?
 
 - When you visit the home page, you will see messages concerning the connection state of both the router and TFTP server.
 

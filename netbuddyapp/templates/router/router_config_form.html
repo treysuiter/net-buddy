@@ -15,7 +15,7 @@
             {% if router_config.id is not None%}
             <p>Filename: {{ router_config.filename }}</p>
             {% else %}
-            <label for="title">Filename: </label>
+            <label for="filename">Filename: </label>
             <input required id="filename" type="text" name="filename" value="{{ router_config.filename }}">
             (Letters, numbers, dashes or undescores only)
             {% endif %}

@@ -83,6 +83,7 @@ def router_config_details(request, router_config_id):
             if tftp_ping_check is not None:
 
                 #Netmiko commands to load a saved running-config
+
                 try:
                     conn = ConnectHandler(**get_device_obj(request))
 
@@ -97,10 +98,6 @@ def router_config_details(request, router_config_id):
                     return redirect(reverse('netbuddyapp:routercurrentinfo'))
 
                 except Exception as exception:
-
-                    # error_text='Uh oh, looks like something went wrong. Check and see is your device is running, connected, and configured properly.'
-                    # template = 'router/router_current_info.html'
-                    # context = {'error_text': error_text, 'exception': exception}
 
                     return nb_exception(request, exception)
 
@@ -117,22 +114,28 @@ def router_config_details(request, router_config_id):
             try:
                 conn = ConnectHandler(**get_device_obj(request))
 
-                # conn.send_command('conf term')
-                test_string = router_config_to_load.config_string
+                # command_string = router_config_to_load.config_string
+                # command_list = command_string.split('\n')
+                # i = 0
+                # for command_line in command_list:
+                #     command_list[i] = command_list[i].strip(' ')
+                #     if 'Building configuration' in command_list[i] or 'Current configuration' in command_list[i] or 'Last configuration' in command_list[i]:
+                #         command_list[i] = '!'
+                #     i += 1
 
-                result = test_string.find('version')
-                print(result, 'this is where version is')
                 conn.send_command_timing('conf term')
                 output = conn.send_command_timing(f'{router_config_to_load.config_string}')
+                prompt_output = conn.find_prompt()
+                uptime_output = conn.send_command("show version | i uptime")
+                showrun_output = conn.send_command("show run")
                 conn.disconnect()
 
-                return redirect(reverse('netbuddyapp:routercurrentinfo'))
+                template = 'router/router_current_info.html'
+                context = {'prompt_output': prompt_output, 'uptime_output': uptime_output, 'showrun_output': showrun_output }
+
+                return render(request, template, context)
 
             except Exception as exception:
-
-                # error_text='Uh oh, looks like something went wrong. Check and see is your device is running, connected, and configured properly.'
-                # template = 'router/router_current_info.html'
-                # context = {'error_text': error_text, 'exception': exception}
 
                 return nb_exception(request, exception)
 

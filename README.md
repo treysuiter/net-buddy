@@ -70,7 +70,7 @@ connection with the device and send it commands.
   - `python manage.py makemigrations netbuddyapp`
   - `python manage.py migrate`
 
-5. Create a superuser for your local version of the app (make sure you do this before loading fixtures).
+5. Create a superuser.
 
   - `python manage.py createsuperuser`
 

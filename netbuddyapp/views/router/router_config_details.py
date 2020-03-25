@@ -93,9 +93,15 @@ def router_config_details(request, router_config_id):
 
                         return nb_exception(request, "File not found on TFTP server")
 
+                    prompt_output = conn.find_prompt()
+                    uptime_output = conn.send_command("show version | i uptime")
+                    showrun_output = conn.send_command("show run")
                     conn.disconnect()
 
-                    return redirect(reverse('netbuddyapp:routercurrentinfo'))
+                    template = 'router/router_current_info.html'
+                    context = {'prompt_output': prompt_output, 'uptime_output': uptime_output, 'showrun_output': showrun_output, 'file_loaded': f"{router_config_to_load.filename} has been loaded. Please check running_config output to confirm."}
+
+                    return render(request, template, context)
 
                 except Exception as exception:
 
@@ -111,6 +117,7 @@ def router_config_details(request, router_config_id):
         ):
 
             #Netmiko commands to load a saved running-config
+            
             try:
                 conn = ConnectHandler(**get_device_obj(request))
 
@@ -131,7 +138,7 @@ def router_config_details(request, router_config_id):
                 conn.disconnect()
 
                 template = 'router/router_current_info.html'
-                context = {'prompt_output': prompt_output, 'uptime_output': uptime_output, 'showrun_output': showrun_output }
+                context = {'prompt_output': prompt_output, 'uptime_output': uptime_output, 'showrun_output': showrun_output, 'file_loaded': f"{router_config_to_load.filename} has been loaded. Please check running_config output to confirm." }
 
                 return render(request, template, context)
 

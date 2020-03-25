@@ -74,17 +74,11 @@ connection with the device and send it commands.
 
   - `python manage.py createsuperuser`
 
-### Did you create a superuser? If so, carry on. If not, please go back to step 5.
-
-6. Populate your database with initial data from fixtures files: (NOTE: every time you run this it will remove existing data and repopulate the tables) 
-
-- `python manage.py loaddata */fixtures/*.json`
-
-7. Start server.
+6. Start server.
 
   - `python manage.py runserver`
 
-8. Head to http://localhost:8000/ and have fun!
+7. Head to http://localhost:8000/, login with your superuser username and password, and have fun!
 
 ## NetBuddy FAQ
 
@@ -128,5 +122,8 @@ connection with the device and send it commands.
 
 - https://pynet.twb-tech.com/blog/automation/netmiko.html
 
+11. Hey, where are the fixtures?
+
+- As I have no idea what ip you will be using for your router or TFTP server, creating fixtures would serve no purpose. Also, a filename in the netbuddyapp_routerconfiguration table would not have an immediate corresponding file on your TFTP server.
 
 

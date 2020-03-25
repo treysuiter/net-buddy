@@ -93,9 +93,15 @@ def router_config_details(request, router_config_id):
 
                         return nb_exception(request, "File not found on TFTP server")
 
+                    prompt_output = conn.find_prompt()
+                    uptime_output = conn.send_command("show version | i uptime")
+                    showrun_output = conn.send_command("show run")
                     conn.disconnect()
 
-                    return redirect(reverse('netbuddyapp:routercurrentinfo'))
+                    template = 'router/router_current_info.html'
+                    context = {'prompt_output': prompt_output, 'uptime_output': uptime_output, 'showrun_output': showrun_output }
+
+                    return render(request, template, context)
 
                 except Exception as exception:
 

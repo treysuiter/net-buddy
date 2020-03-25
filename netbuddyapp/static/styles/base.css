@@ -39,7 +39,10 @@ button, .nb-button{
     padding: 5px;
     margin: 2px;
 }
-
+button:hover, input.nb-button:hover{
+    filter: invert(40%);
+    cursor: pointer;
+}
 /* a {text-decoration: none; color: white;} */
 a:link { text-decoration: none; color:white; }
 a:visited { text-decoration: none; color:white; }

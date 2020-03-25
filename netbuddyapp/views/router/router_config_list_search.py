@@ -9,8 +9,7 @@ from django.db.models import Q
 @login_required
 def router_config_list_search(request):
     """
-    Handles listing user's saved router config on My Configs;
-    Handles saving new router configs
+    Handles search for router configs.
     """
     if request.method == 'GET':
 
@@ -23,23 +22,3 @@ def router_config_list_search(request):
         }
 
         return render(request, template, context)
-
-        # Original slq query
-
-        # current_user = request.user
-        # form_data = request.POST
-
-        # with sqlite3.connect(Connection.db_path) as conn:
-        #     db_cursor = conn.cursor()
-
-        #     db_cursor.execute("""
-        #     INSERT INTO netbuddyapp_routerconfiguration
-        #     (
-        #         filename, description, netbuddy_user_id, created_at
-        #     )
-        #     VALUES (?, ?, ?, ?)
-        #     """,
-        #     (form_data['filename'], form_data['description'],
-        #         current_user.id, 'placeholder'))
-
-        # return redirect(reverse('netbuddyapp:routerconfiglist'))

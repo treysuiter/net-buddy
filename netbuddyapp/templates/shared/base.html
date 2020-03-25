@@ -17,7 +17,7 @@
      <nav id="site-nav">
         <ol class="navList">
             {% with url_name=request.resolver_match.url_name %}
-            <li class="navList__route {% if url_name == 'home' %}active{% endif %}"><a href="{% url 'netbuddyapp:home' %}">Home</a></li>
+            <li class="navList__route {% if url_name == 'home' %}active{% endif %}"><a id="home-link" href="{% url 'netbuddyapp:home' %}">Home</a></li>
             {% if user.is_authenticated %}
             |<li class="navList__route {% if url_name == 'routerconfig' or url_name == 'routerconfiglist' or url_name == 'routerconfigform' or url_name == 'routerconfigedit'%}active{% endif %}"><a href="{% url 'netbuddyapp:routerconfiglist' %}">My Router Configs</a></li>|
             <li class="navList__route {% if url_name == 'routercurrentinfo' %}active{% endif %}"><a id="current-router-info-link" href="{% url 'netbuddyapp:routercurrentinfo' %}">Current Router Config Info</a></li>|

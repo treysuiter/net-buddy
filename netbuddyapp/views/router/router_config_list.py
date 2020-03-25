@@ -14,6 +14,9 @@ def router_config_list(request):
     Handles listing user's saved router config on My Configs;
     Handles saving new router configs
     """
+
+    #List all of the user's configs
+
     if request.method == 'GET':
         
         all_router_configs = RouterConfiguration.objects.filter(netbuddy_user_id=request.user.id)
@@ -24,6 +27,8 @@ def router_config_list(request):
         }
 
         return render(request, template, context)
+
+    #Posts new configs    
 
     elif request.method == 'POST':
 
@@ -67,44 +72,41 @@ def router_config_list(request):
                 new_config.save()
                 return redirect(reverse('netbuddyapp:routerconfiglist'))
 
+            #Exception if conn.send_command throws error
             except Exception as exception:
 
                 return nb_exception(request, exception)
         
+        #Filename was already used
         elif unique_filename_check is not None:
             template = 'router/router_config_form.html'
             context = {'bad_file_name': 'Filename must be unique.'}
 
             return render(request, template, context)
 
-
+        #Filename had special characters
         else:
             template = 'router/router_config_form.html'
             context = {'bad_file_name': 'Filename can only contain letters, numbers, dashes or underscores.'}
 
             return render(request, template, context)
-            # error_text='Uh oh, looks like something went wrong. Check and see is your device is running, connected, and configured properly.'
-            # template = 'router/router_current_info.html'
-            # context = {'error_text': error_text, 'exception': exception}
+        
+# Original sql query
 
-            # return render(request, template, context)
+# current_user = request.user
+# form_data = request.POST
 
-        # Original slq query
+# with sqlite3.connect(Connection.db_path) as conn:
+#     db_cursor = conn.cursor()
 
-        # current_user = request.user
-        # form_data = request.POST
+#     db_cursor.execute("""
+#     INSERT INTO netbuddyapp_routerconfiguration
+#     (
+#         filename, description, netbuddy_user_id, created_at
+#     )
+#     VALUES (?, ?, ?, ?)
+#     """,
+#     (form_data['filename'], form_data['description'],
+#         current_user.id, 'placeholder'))
 
-        # with sqlite3.connect(Connection.db_path) as conn:
-        #     db_cursor = conn.cursor()
-
-        #     db_cursor.execute("""
-        #     INSERT INTO netbuddyapp_routerconfiguration
-        #     (
-        #         filename, description, netbuddy_user_id, created_at
-        #     )
-        #     VALUES (?, ?, ?, ?)
-        #     """,
-        #     (form_data['filename'], form_data['description'],
-        #         current_user.id, 'placeholder'))
-
-        # return redirect(reverse('netbuddyapp:routerconfiglist'))
+# return redirect(reverse('netbuddyapp:routerconfiglist'))

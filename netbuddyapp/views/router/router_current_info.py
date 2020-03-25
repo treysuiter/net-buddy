@@ -28,9 +28,4 @@ def router_current_info(request):
 
         except Exception as exception:
 
-            # error_text='Uh oh, looks like something went wrong. Check and see is your device is running, connected, and configured properly.'
-            # template = 'router/router_current_info.html'
-            # context = {'error_text': error_text, 'exception': exception}
-
             return nb_exception(request, exception)
-

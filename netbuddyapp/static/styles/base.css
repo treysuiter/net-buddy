@@ -69,14 +69,14 @@ a:focus { text-decoration: none; color:white; }
 }
 
 .commandsscrollbox {
-    height:40%;
+    height:30%;
     width:75%;
     /* border:1px solid #ccc; */
     overflow:auto;
 }
 
 .listscrollbox {
-    height:40%;
+    height:30%;
     width:40%;
     /* border:1px solid #ccc; */
     overflow:auto;

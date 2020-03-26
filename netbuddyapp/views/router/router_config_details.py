@@ -99,7 +99,7 @@ def router_config_details(request, router_config_id):
                     conn.disconnect()
 
                     template = 'router/router_current_info.html'
-                    context = {'prompt_output': prompt_output, 'uptime_output': uptime_output, 'showrun_output': showrun_output, 'file_loaded': f"{router_config_to_load.filename} has been loaded. Please check running_config output to confirm."}
+                    context = {'prompt_output': prompt_output, 'uptime_output': uptime_output, 'showrun_output': showrun_output, 'file_loaded': f"{router_config_to_load.filename} has been loaded."}
 
                     return render(request, template, context)
 
@@ -121,15 +121,6 @@ def router_config_details(request, router_config_id):
             try:
                 conn = ConnectHandler(**get_device_obj(request))
 
-                # command_string = router_config_to_load.config_string
-                # command_list = command_string.split('\n')
-                # i = 0
-                # for command_line in command_list:
-                #     command_list[i] = command_list[i].strip(' ')
-                #     if 'Building configuration' in command_list[i] or 'Current configuration' in command_list[i] or 'Last configuration' in command_list[i]:
-                #         command_list[i] = '!'
-                #     i += 1
-
                 conn.send_command_timing('conf term')
                 output = conn.send_command_timing(f'{router_config_to_load.config_string}')
                 prompt_output = conn.find_prompt()
@@ -138,7 +129,7 @@ def router_config_details(request, router_config_id):
                 conn.disconnect()
 
                 template = 'router/router_current_info.html'
-                context = {'prompt_output': prompt_output, 'uptime_output': uptime_output, 'showrun_output': showrun_output, 'file_loaded': f"{router_config_to_load.filename} has been loaded. Please check running_config output to confirm." }
+                context = {'prompt_output': prompt_output, 'uptime_output': uptime_output, 'showrun_output': showrun_output, 'file_loaded': f"{router_config_to_load.filename} has been loaded." }
 
                 return render(request, template, context)
 

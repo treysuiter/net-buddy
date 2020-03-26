@@ -20,7 +20,15 @@
         <p> Currently Configured Router IP: {{ current_netbuddy_user.current_router_ip}}</p>
         <p> Currently Configured TFTP IP: {{ current_netbuddy_user.tftp_ip}}</p>
     {% else %}
-    <h2> Welcome to NetBuddy; your Cisco config file assistant.</h2>
+    <h2> Welcome to:</h2>
+    <pre>
+ __   __     ______     ______   ______     __  __     _____     _____     __  __    
+/\ "-.\ \   /\  ___\   /\__  _\ /\  == \   /\ \/\ \   /\  __-.  /\  __-.  /\ \_\ \   
+\ \ \-.  \  \ \  __\   \/_/\ \/ \ \  __<   \ \ \_\ \  \ \ \/\ \ \ \ \/\ \ \ \____ \  
+ \ \_\\"\_\  \ \_____\    \ \_\  \ \_____\  \ \_____\  \ \____-  \ \____-  \/\_____\ 
+  \/_/ \/_/   \/_____/     \/_/   \/_____/   \/_____/   \/____/   \/____/   \/_____/ 
+    </pre>
+    <h3>Your Cisco config file assistant.</h3>
     <p>Note: NetBuddy is not affiliated with Cisco in any way.</p>
     <p>Intended for student use only; not professional.</p>
      <ul>
@@ -35,6 +43,7 @@
         </form>
     </ul>
     {% endif %}
+    
 {% endblock %}
 
 {% comment %} <pre>{{ output }}</pre>

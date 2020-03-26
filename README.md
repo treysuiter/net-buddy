@@ -128,4 +128,7 @@ connection with the device and send it commands.
 
 - As I have no idea what ip you will be using for your router or TFTP server, creating fixtures would serve no purpose. Also, a filename in the netbuddyapp_routerconfiguration table would not have an immediate corresponding file on your TFTP server.
 
+## The Lab
+
+![the lab image](./thelab.jpg)
 

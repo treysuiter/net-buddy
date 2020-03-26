@@ -1,7 +1,7 @@
 # NetBuddy
 Your Cisco config file assistant.
 
-![net buddy logo](./netbuddyWelcome.jpg)
+![net buddy logo](netbuddyWelcome.jpg)
 
 ## What is NetBuddy?
 
@@ -130,5 +130,5 @@ connection with the device and send it commands.
 
 ## The Lab
 
-![the lab image](./newlabpic.jpg)
+![the lab image](newlabpic.jpg)
 

@@ -99,7 +99,7 @@ def router_config_details(request, router_config_id):
                     conn.disconnect()
 
                     template = 'router/router_current_info.html'
-                    context = {'prompt_output': prompt_output, 'uptime_output': uptime_output, 'showrun_output': showrun_output, 'file_loaded': f"{router_config_to_load.filename} has been loaded. Please check running_config output to confirm."}
+                    context = {'prompt_output': prompt_output, 'uptime_output': uptime_output, 'showrun_output': showrun_output, 'file_loaded': f"{router_config_to_load.filename} has been loaded."}
 
                     return render(request, template, context)
 
@@ -129,7 +129,7 @@ def router_config_details(request, router_config_id):
                 conn.disconnect()
 
                 template = 'router/router_current_info.html'
-                context = {'prompt_output': prompt_output, 'uptime_output': uptime_output, 'showrun_output': showrun_output, 'file_loaded': f"{router_config_to_load.filename} has been loaded. Please check running_config output to confirm." }
+                context = {'prompt_output': prompt_output, 'uptime_output': uptime_output, 'showrun_output': showrun_output, 'file_loaded': f"{router_config_to_load.filename} has been loaded." }
 
                 return render(request, template, context)
 

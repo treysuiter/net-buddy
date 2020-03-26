@@ -1,6 +1,8 @@
 # NetBuddy
 Your Cisco config file assistant.
 
+![net buddy logo](./netbuddyWelcome.jpg)
+
 ## What is NetBuddy?
 
 NetBuddy is an application that allows

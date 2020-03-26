@@ -130,5 +130,5 @@ connection with the device and send it commands.
 
 ## The Lab
 
-![the lab image](./thelab.jpg)
+![the lab image](./newlabpic.jpg)
 

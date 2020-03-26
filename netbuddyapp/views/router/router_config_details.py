@@ -121,15 +121,6 @@ def router_config_details(request, router_config_id):
             try:
                 conn = ConnectHandler(**get_device_obj(request))
 
-                # command_string = router_config_to_load.config_string
-                # command_list = command_string.split('\n')
-                # i = 0
-                # for command_line in command_list:
-                #     command_list[i] = command_list[i].strip(' ')
-                #     if 'Building configuration' in command_list[i] or 'Current configuration' in command_list[i] or 'Last configuration' in command_list[i]:
-                #         command_list[i] = '!'
-                #     i += 1
-
                 conn.send_command_timing('conf term')
                 output = conn.send_command_timing(f'{router_config_to_load.config_string}')
                 prompt_output = conn.find_prompt()

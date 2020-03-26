@@ -35,17 +35,5 @@
     
     {{bad_file_name}}
     
-   
-    <dialog class="loading-message">
-        Saving. Please wait.
-    </dialog>
-
-
     {% endblock %}
-
-{% block scripts %}
-    {% if router_config.id is None%}
-    <script src="{% static 'scripts/loadingMessage.js' %}"></script>
-    {% endif %}
-{% endblock %} 
 

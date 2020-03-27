@@ -72,15 +72,11 @@ connection with the device and send it commands.
   - `python manage.py makemigrations netbuddyapp`
   - `python manage.py migrate`
 
-5. Create a superuser.
-
-  - `python manage.py createsuperuser`
-
-6. Start server.
+5. Start server.
 
   - `python manage.py runserver`
 
-7. Head to http://localhost:8000/, login with your superuser username and password, and have fun!
+6. Head to http://localhost:8000/, register a new user, and have fun!
 
 ## NetBuddy FAQ
 

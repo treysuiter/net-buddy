@@ -15,6 +15,10 @@ using the Django framework and uses the Django ORM to manage
 the database. Also, the Netmiko library was used to create an SSH
 connection with the device and send it commands.
 
+## Link for video demo:
+
+https://www.loom.com/share/4da414cf9828419095ef67745f893962
+
 ### Note : NetBuddy currently only supports Cisco IOS routers.
 
 ## Setup:

@@ -2,7 +2,7 @@ asgiref==3.2.3
 autopep8==1.5
 bcrypt==3.1.7
 cffi==1.14.0
-cryptography==3.2
+cryptography==3.3.2
 django>=3.0.7
 future==0.18.2
 netmiko==3.0.0
